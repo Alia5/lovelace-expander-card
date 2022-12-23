@@ -10,7 +10,7 @@
         }
     },
     "scripts": {
-        "build": "rollup -c",
+        "build": "VERSION=$(git describe --tags) rollup -c",
         "buildAndStart": "dev=true npm run build && npm start --dev",
         "start": "sirv --port 5000 --host 0.0.0.0 --cors --dev public",
         "validate": "svelte-check",
@@ -39,6 +39,7 @@
         "rollup-plugin-css-only": "^4.3.0",
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-svelte": "^7.1.0",
+        "shelljs": "^0.8.5",
         "sirv-cli": "^2.0.2",
         "svelte": "^3.54.0",
         "svelte-check": "^2.9.2",

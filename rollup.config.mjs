@@ -16,9 +16,10 @@ const CONTAINER_TAG_NAME = production ? "expander-child-card" : "expander-child-
 const FILE_NAME = `${TAG_NAME}.js`;
 
 
-const VERSION_STR = shell.exec("git describe --tags", {async: false}).stdout;
 
-export default {
+export default (commandlineargs) => {
+    console.log("commandlineargs: ", commandlineargs);
+    return ({
     input: 'src/index.ts',
     output: {
         format: 'umd',
@@ -33,7 +34,7 @@ export default {
             "tag-name": TAG_NAME,
             "container-tag-name": CONTAINER_TAG_NAME,
             "devModeValue": !production,
-            "versionStr": VERSION_STR,
+            "versionStr": process.env.VERSION,
             preventAssignment: true,
         }),
         svelte({
@@ -45,7 +46,7 @@ export default {
                 customElement: true,
                 hydratable: true,
             },
-            emitCss: true,
+            emitCss: true
         }),
         resolve({
             browser: true,
@@ -63,4 +64,4 @@ export default {
     watch: {
         clearScreen: false,
     },
-};
+})};
