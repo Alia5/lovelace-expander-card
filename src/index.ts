@@ -29,7 +29,7 @@ declare global {
 const version = 'versionStr';
 console.info(`ExpanderCard Version: ${version}`);
 
-const devMode = 'devModeValue' as unknown as boolean;
+const devMode = ('devModeValue' as string) === 'true';
 
 window.customCards = window.customCards || [];
 window.customCards.push(...[
