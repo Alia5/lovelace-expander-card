@@ -87,7 +87,7 @@
                     expanded = !expanded;
                 }}
             >
-                <ha-icon icon="mdi:chevron-down" class={`ico ${expanded ? 'flipped' : ''}`} />
+                <ha-icon icon="mdi:chevron-down" class={`primary ico ${expanded ? 'flipped' : ''}`} />
             </button>
         </div>
     {:else}
@@ -98,8 +98,8 @@
             }}
             style="--button-background:{config['button-background']};"
         >
-            <div class="title">{config.title}</div>
-            <ha-icon icon="mdi:chevron-down" class={`ico ${expanded ? 'flipped' : ''}`} />
+            <div class="primary title">{config.title}</div>
+            <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} />
         </button>
     {/if}
     {#if config.cards && expanded}
