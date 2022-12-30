@@ -10,10 +10,25 @@ Expander/Collapsible card for HomeAssistant
 Please ⭐️ or sponsor this repo if you find it useful.
 
 ## Demo
-![Sample nested phone](examples/nested.png)
+
+![Sample gif](examples/example.gif)
+
 ---
+
+Expand button as overlay:
 ![Sample lights overlay](examples/lights_overlay_button.png)
+
 ---
+
+You can even nest expanders!  
+
+![Sample nesting](examples/nested.png)
+
+---
+
+
+Clear Background (default theme):  
+
 ![Sample clear router](examples/clear_router.png)
 
 ## Options
