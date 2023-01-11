@@ -87,7 +87,7 @@
                     expanded = !expanded;
                 }}
             >
-                <ha-icon icon="mdi:chevron-down" class={`primary ico ${expanded ? 'flipped' : ''}`} />
+                <ha-icon icon="mdi:chevron-down" class={`primaryico ${expanded ? 'flipped' : ''}`} />
             </button>
         </div>
     {:else}
