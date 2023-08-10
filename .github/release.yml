@@ -1,11 +1,8 @@
 changelog:
   categories:
-    - title: 🏕 Features
-      labels:
-        - '*'
-      exclude:
-        labels:
-          - dependencies
-    - title: 👒 Dependencies
+    - title: 🛠 Dependency Upgrades 
       labels:
         - dependencies
+    - title: ⭐ New Features
+      labels:
+        - "*"
