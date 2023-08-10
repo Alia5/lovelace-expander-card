@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "config:base",
+    ":combinePatchMinorReleases",
+    ":label(dependencies)",
+    "group:definitelyTyped"
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "prCreation": "not-pending",
+  "prBodyTemplate": "{{{table}}}",
+  "prFooter": "",
+  "dependencyDashboardHeader": "",
+  "dependencyDashboardLabels": ["dependencies"],
+  "dependencyDashboardAutoclose": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "major-update"]
+    }
+  ]
+}
