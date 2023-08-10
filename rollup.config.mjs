@@ -29,6 +29,10 @@ export default (commandlineargs) => {
             return !production;
         },
     },
+    onwarn(warning, warn) {
+      if (warning.code === 'THIS_IS_UNDEFINED') return;
+      warn(warning);
+    },
     plugins: [
         replace({
             "tag-name": TAG_NAME,
