@@ -168,7 +168,7 @@
         text-align: left;
     }
     .ico {
-        color: white;
+        color: var(--icon-color);
         transition-property: transform;
         transition-duration: 0.35s;
     }
