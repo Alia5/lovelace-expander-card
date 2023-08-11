@@ -14,6 +14,7 @@
   "dependencyDashboardLabels": ["dependencies"],
   "dependencyDashboardAutoclose": true,
   "includeForks": true,
+  "forkProcessing": "enabled",
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
