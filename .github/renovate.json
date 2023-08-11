@@ -13,6 +13,7 @@
   "dependencyDashboardHeader": "",
   "dependencyDashboardLabels": ["dependencies"],
   "dependencyDashboardAutoclose": true,
+  "includeForks": true,
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
