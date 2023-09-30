@@ -41,7 +41,6 @@ export default (commandlineargs) => {
         svelte({
             preprocess:
                 sveltePreprocess({
-                    sourceMap: dev,
                 }),
             compilerOptions: {
                 customElement: true,
@@ -54,7 +53,7 @@ export default (commandlineargs) => {
             dedupe: ['svelte']
         }),
         commonjs(),
-        typescript({ sourceMap: false }),
+        typescript({ sourceMap: true }),
         !dev && terser({ format: { comments: false } }),
     ],
     watch: {
