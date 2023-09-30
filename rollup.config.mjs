@@ -23,7 +23,6 @@ export default (commandlineargs) => {
     input: 'src/index.ts',
     output: {
         format: 'umd',
-        sourcemap: true,
         name: MAIN_COMPONENT_NAME,
         file: `public/${FILE_NAME}`,
     },
