@@ -39,9 +39,13 @@ export default (commandlineargs) => {
             preventAssignment: true,
         }),
         svelte({
+            preprocess:
+                sveltePreprocess({
+                    sourceMap: dev,
+                }),
             compilerOptions: {
                 customElement: true,
-                hydratable: true
+                hydratable: true,
             },
             emitCss: true
         }),
