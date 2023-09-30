@@ -23,6 +23,7 @@ export default (commandlineargs) => {
     input: 'src/index.ts',
     output: {
         format: 'umd',
+        sourcemap: true,
         name: MAIN_COMPONENT_NAME,
         file: `public/${FILE_NAME}`,
     },
@@ -34,7 +35,6 @@ export default (commandlineargs) => {
         replace({
             "tag-name": TAG_NAME,
             "container-tag-name": CONTAINER_TAG_NAME,
-            "devModeValue": `${!production}`,
             "versionStr": process.env.VERSION,
             preventAssignment: true,
         }),
@@ -50,7 +50,7 @@ export default (commandlineargs) => {
             dedupe: ['svelte']
         }),
         commonjs(),
-        typescript(),
+        typescript({ sourceMap: false }),
         !dev && terser({ format: { comments: false } }),
     ],
     watch: {
