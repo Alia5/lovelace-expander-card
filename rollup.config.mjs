@@ -53,7 +53,7 @@ export default (commandlineargs) => {
             dedupe: ['svelte']
         }),
         commonjs(),
-        typescript({ sourceMap: true }),
+        typescript({ sourceMap: true , inlineSources: true}),
         !dev && terser({ format: { comments: false } }),
     ],
     watch: {
