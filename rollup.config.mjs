@@ -44,11 +44,12 @@ export default (commandlineargs) => {
         svelte({
             preprocess:
                 sveltePreprocess({
-                    sourceMap: !production,
+                    sourceMap: true,
                 }),
             compilerOptions: {
                 customElement: true,
                 hydratable: true,
+                enableSourcemap: true
             },
             emitCss: true
         }),
@@ -58,8 +59,8 @@ export default (commandlineargs) => {
         }),
         commonjs(),
         typescript({
-            sourceMap: !production,
-            inlineSources: !production
+            sourceMap: true,
+            inlineSources: true
         }),
         // If we're building for production (npm run build
         // instead of npm run dev), minify
