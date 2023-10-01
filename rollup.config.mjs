@@ -6,13 +6,12 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import sveltePreprocess from "svelte-preprocess";
 
-const dev = process.env.ROLLUP_WATCH;
-const production = !dev;
+const production = !process.env.ROLLUP_WATCH;
 
 const MAIN_COMPONENT_NAME = "ExpanderCard";
 const MAIN_COMPONENT_REGEX = /ExpanderCard\.svelte$/;
-const TAG_NAME = dev ? "expander-card-dev" : "expander-card";
-const CONTAINER_TAG_NAME = dev ? "expander-child-card-dev" : "expander-child-card";
+const TAG_NAME = production ? "expander-card" : "expander-card-dev";
+const CONTAINER_TAG_NAME = production ? "expander-child-card" : "expander-child-card-dev";
 const FILE_NAME = `${TAG_NAME}.js`;
 
 
