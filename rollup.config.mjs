@@ -6,8 +6,8 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import sveltePreprocess from "svelte-preprocess";
 
-
 const dev = process.env.ROLLUP_WATCH;
+const production = !dev;
 
 const MAIN_COMPONENT_NAME = "ExpanderCard";
 const MAIN_COMPONENT_REGEX = /ExpanderCard\.svelte$/;
@@ -22,6 +22,7 @@ export default (commandlineargs) => {
     return ({
     input: 'src/index.ts',
     output: {
+        sourcemap: !production,
         format: 'umd',
         name: MAIN_COMPONENT_NAME,
         file: `public/${FILE_NAME}`,
@@ -40,10 +41,12 @@ export default (commandlineargs) => {
         svelte({
             preprocess:
                 sveltePreprocess({
+                    sourceMap: !production
                 }),
             compilerOptions: {
                 customElement: true,
                 hydratable: true,
+                dev: !production
             },
             emitCss: true
         }),
@@ -52,8 +55,11 @@ export default (commandlineargs) => {
             dedupe: ['svelte']
         }),
         commonjs(),
-        typescript({ sourceMap: true , inlineSources: true}),
-        !dev && terser({ format: { comments: false } }),
+        typescript({      
+            sourceMap: !production,
+            inlineSources: !production
+        }),
+        production && terser(),
     ],
     watch: {
         clearScreen: false,
