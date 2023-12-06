@@ -89,3 +89,10 @@ resources:
   - url: /local/expander-card.js
     type: js
 ```
+
+## Note on closing the issue tracker
+
+FOSS is broken.
+People suck
+
+I don't care anymore.
