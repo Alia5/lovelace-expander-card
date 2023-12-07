@@ -7,7 +7,7 @@ defaults:
     working-directory: .
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
