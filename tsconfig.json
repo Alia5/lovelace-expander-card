@@ -10,5 +10,5 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "rollup.config.js"],
 }
