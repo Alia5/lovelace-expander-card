@@ -37,7 +37,6 @@
     "prettier-plugin-svelte": "^3.2.3",
     "rollup": "^4.17.2",
     "rollup-plugin-css-only": "^4.5.2",
-    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.2.0",
     "shelljs": "^0.8.5",
     "sirv-cli": "^2.0.2",
