@@ -1,4 +1,3 @@
-@@ -1,60 +0,0 @@
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import svelte from 'rollup-plugin-svelte';
