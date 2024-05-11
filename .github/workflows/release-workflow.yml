@@ -57,7 +57,7 @@ jobs:
         with:
           body: "Release version ${{ github.event.inputs.release_version }}."
           tag_name: ${{ github.event.inputs.release_version }}
-          target_commitish: "master"
+          target_commitish: "main"
           draft: false
           prerelease: false
           files: public/expander-card.js
