@@ -132,8 +132,8 @@ limitations under the License.
             });
             setTimeout(() => {
                 valueChanged();
-            }, 100) as unknown as number;
-        }, 5000) as unknown as number;
+            }, 500) as unknown as number;
+        }, 500000) as unknown as number;
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
