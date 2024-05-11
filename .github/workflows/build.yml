@@ -1,21 +1,24 @@
-name: Build
+name: 'Build'
 
-on: workflow_dispatch
-
-defaults:
-  run:
-    working-directory: .
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  Build:
+  build:
+    name: Test build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-      - run: npm i   
-      - run: npm run build
+      - uses: actions/checkout@v4
+      - name: Build
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build
