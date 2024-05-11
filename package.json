@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "npm run lint && rollup rollup.config.js",
+    "build": "npm run lint && rollup -c",
     "buildAndStart": "dev=true npm run build && npm start --dev",
     "start": "sirv --port 5000 --host 0.0.0.0 --cors --dev public",
     "validate": "svelte-check",
@@ -48,5 +48,11 @@
   },
   "dependencies": {
     "custom-card-helpers": "^1.9.0"
+  },
+  "resolutions": {
+    "@formatjs/intl-utils": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.2.1.tgz"
+  },
+  "resolutionsComments": {
+    "@formatjs/intl-utils": "Outdated, producing a warning at build, unused by us, brought by custom-card-helpers => skip it"
   }
 }

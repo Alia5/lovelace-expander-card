@@ -10,5 +10,8 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-    "include": ["src/**/*", "rollup.config.js"],
+    "include": ["src/**/*", "rollup.config.mjs"],
+	"exclude": [
+		"node_modules",
+	  ]
 }
