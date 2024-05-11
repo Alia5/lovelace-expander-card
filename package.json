@@ -36,7 +36,7 @@
         "prettier": "^2.7.1",
         "prettier-plugin-svelte": "^2.8.0",
         "rollup": "^3.8.0",
-        "rollup-plugin-css-only": "^4.3.0",
+        "rollup-plugin-css-only": "^4.5.2",
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-svelte": "^7.1.0",
         "shelljs": "^0.8.5",
