@@ -23,7 +23,7 @@
         "@rollup/plugin-replace": "^5.0.2",
         "@rollup/plugin-terser": "^0.4.0",
         "@rollup/plugin-typescript": "^10.0.1",
-        "@tsconfig/svelte": "^3.0.0",
+        "@tsconfig/svelte": "^5.0.0",
         "@typescript-eslint/eslint-plugin": "^5.45.0",
         "@typescript-eslint/parser": "^5.45.0",
         "eslint": "^8.16.0",
