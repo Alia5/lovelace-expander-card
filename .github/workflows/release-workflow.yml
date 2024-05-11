@@ -51,7 +51,7 @@ jobs:
 
       - name: "Create Github release (full)"
         if: ${{ !contains( github.event.inputs.release_version, '-rc' ) }}
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         id: expander_card_release
         with:
           body: "Release version ${{ github.event.inputs.release_version }}."
