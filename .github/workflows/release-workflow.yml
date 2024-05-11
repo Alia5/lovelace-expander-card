@@ -14,12 +14,13 @@ jobs:
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Git
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+
       - name: Cache node modules
         uses: actions/cache@v3
         env:
