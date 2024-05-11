@@ -36,7 +36,6 @@ limitations under the License.
                   return;
               }
               void (async () => {
-                  config.style='display:contents';
                   const el = (await cardUtil).createCardElement(config);
                   el.hass = p.hass;
                   node.innerHTML = '';
