@@ -75,7 +75,7 @@
   {#if config['title-card']}
     <div
       class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
-      use:collapse={{expanded}}
+      use:collapse={{ expanded }}
     >
       <div
         class="title-card-container"
@@ -110,7 +110,7 @@
       }}
       style="--button-background:{config['button-background']};"
     >
-      <div class="primary title" use:collapse={{expanded}}>{config.title}</div>
+      <div class="primary title" use:collapse={{ expanded }}>{config.title}</div>
       <ha-icon
         icon="mdi:chevron-down"
         class={` primaryico ${expanded ? 'flipped' : ''}`}
