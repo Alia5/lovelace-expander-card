@@ -117,7 +117,7 @@
       />
     </button>
   {/if}
-  {#if config.cards && expanded}
+  {#if config.cards}
     <div
       style="--gap:{config.gap}; --child-padding:{config['child-padding']}"
       class="children-container"
