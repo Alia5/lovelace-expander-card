@@ -9,7 +9,7 @@
   import Card from './Card.svelte';
   import { flip } from 'svelte/animate';
   import { quintOut } from 'svelte/easing';
-  import { collapse } from 'svelte-collapse';
+  import collapse from 'svelte-collapse';
 
   // hack get reference to own component
   import { get_current_component } from 'svelte/internal';
