@@ -31,14 +31,17 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-
             ${{ runner.os }}-
       - name: Setup NodeJs
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '17'
+          node-version: '20'
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Lint
+        run: npm run lint
 
       - name: Set app version (Unix)
         run: npm version ${{ github.event.inputs.release_version }} --no-git-tag-version
