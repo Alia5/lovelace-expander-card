@@ -9,6 +9,7 @@
   import Card from './Card.svelte';
   import { flip } from 'svelte/animate';
   import { quintOut } from 'svelte/easing';
+  import { collapse } from 'svelte-collapse';
 
   // hack get reference to own component
   import { get_current_component } from 'svelte/internal';
@@ -74,6 +75,7 @@
   {#if config['title-card']}
     <div
       class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
+      use:collapse={{expanded}}
     >
       <div
         class="title-card-container"
@@ -108,7 +110,7 @@
       }}
       style="--button-background:{config['button-background']};"
     >
-      <div class="primary title">{config.title}</div>
+      <div class="primary title" use:collapse={{expanded}}>{config.title}</div>
       <ha-icon
         icon="mdi:chevron-down"
         class={` primaryico ${expanded ? 'flipped' : ''}`}
