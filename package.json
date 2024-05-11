@@ -54,5 +54,8 @@
   },
   "resolutionsComments": {
     "@formatjs/intl-utils": "Outdated, producing a warning at build, unused by us, brought by custom-card-helpers => skip it"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
