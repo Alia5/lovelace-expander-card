@@ -3,12 +3,8 @@
 <script lang="ts">
   import { default as Editor } from './ExpanderCardEditor.svelte';
 
-  import { fade } from 'svelte/transition';
-  import { cubicIn, cubicOut } from 'svelte/easing';
   import type { HomeAssistant } from 'custom-card-helpers';
   import Card from './Card.svelte';
-  import { flip } from 'svelte/animate';
-  import { quintOut } from 'svelte/easing';
   import collapse from 'svelte-collapse';
 
   // hack get reference to own component
@@ -123,17 +119,7 @@
       class="children-container"
     >
       {#each config.cards as card (card)}
-        <div
-          class="child-card"
-          animate:flip={{ delay: 250, duration: 250, easing: quintOut }}
-        >
-          <div
-            in:fade={{ duration: 500, easing: cubicOut }}
-            out:fade={{ duration: 250, easing: cubicIn }}
-          >
-            <Card {hass} config={card} type={card.type} />
-          </div>
-        </div>
+          <Card {hass} config={card} type={card.type}/>
       {/each}
     </div>
   {/if}
