@@ -5,6 +5,8 @@
 ![downloads][downloads-badge]
 ![build][build-badge]
 
+<a href="https://www.paypal.me/MelleDennis" target="_blank"><img src="https://www.paypalobjects.com/webstatic/paypalme/images/social/pplogo384.png" alt="PayPal.Me MelleDennis" style="height: auto !important;width: auto !important;" ></a>
+
 
 Expander/Collapsible card for HomeAssistant  
 
