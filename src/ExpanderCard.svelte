@@ -22,7 +22,8 @@
     export let hass: HomeAssistant;
 
     const defaults = {
-        'gap': '0.6em',
+        'gap': '0.0em',
+        'expanded-gap': '0.6em',
         'padding': '1em',
         'clear': false,
         'title': 'Expander',
@@ -68,7 +69,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--gap:{config.gap}; --padding:{config.padding}"
+    style="--gap {open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>

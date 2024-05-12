@@ -16,6 +16,7 @@ export interface ExpanderConfig {
     clear?: boolean;
     cards?: { type: string }[];
     gap: string;
+    'expanded-gap': string;
     padding: string;
     title: string;
     'title-card'?: LovelaceCardConfig;
