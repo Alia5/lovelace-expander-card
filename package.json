@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "VERSION=$(git describe --tags) npm run lint && rollup -c",
+    "build": "npm run lint && rollup -c",
     "buildAndStart": "dev=true npm run build && npm start --dev",
     "start": "sirv --port 5000 --host 0.0.0.0 --cors --dev public",
     "validate": "svelte-check",
@@ -26,9 +26,9 @@
     "@rollup/plugin-typescript": "^10.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@tsconfig/svelte": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
-    "eslint": "^8.16.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0 ",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",

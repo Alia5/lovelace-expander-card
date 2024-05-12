@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
+import json from "@rollup/plugin-json";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -48,6 +49,7 @@ export default (commandlineargs) => {
                 dedupe: ['svelte']
             }),
             commonjs(),
+            json(),
             typescript({
                 sourceMap: true,
                 inlineSources: !production
