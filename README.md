@@ -5,7 +5,7 @@
 ![downloads][downloads-badge]
 ![build][build-badge]
 
-<a href="https://www.paypal.me/MelleDennis" target="_blank"><img src="https://www.paypalobjects.com/webstatic/paypalme/images/social/pplogo384.png" alt="PayPal.Me MelleDennis" style="height: auto !important;width: auto !important;" ></a>
+<a href="https://www.paypal.me/MelleDennis" target="_blank"><img src="https://www.paypalobjects.com/webstatic/paypalme/images/social/pplogo384.png" alt="PayPal.Me MelleDennis" style="height: 50px !important;width: 50px !important;" ></a>
 
 
 Expander/Collapsible card for HomeAssistant  
@@ -55,7 +55,8 @@ Yaml:
 | clear                     | boolean  | _false_       | true\|false            | Remove Background                                     |
 | expanded                  | boolean  | _false_       | true\|false            | Start expanded                                        |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |
-| gap                       | string   | _0.6em_       | css-size               | gap between child cards                               |
+| gap                       | string   | _0.0em_       | css-size               | gap between cards when expander closed                |
+| expanded-gap              | string   | _0.6em_       | css-size               | gap between child cards when expander open            |
 | padding                   | string   | _1em_         | css-size               | padding of all card content                           |
 | child-padding             | string   | _0.5em_       | css-size               | padding of child cards                                |
 | title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                               |
