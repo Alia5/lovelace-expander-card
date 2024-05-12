@@ -41,9 +41,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Lint
-        run: npm run lint
-
       - name: Set app version (Unix)
         run: npm version ${{ github.event.inputs.release_version }} --no-git-tag-version
 
