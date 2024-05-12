@@ -1,6 +1,6 @@
 {
   "name": "lovelace-expander-card",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "watch": {
     "buildAndStart": {
       "patterns": [
@@ -17,6 +17,7 @@
     "dev": "npm-watch",
     "lint": "eslint ."
   },
+  
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.0.1",
