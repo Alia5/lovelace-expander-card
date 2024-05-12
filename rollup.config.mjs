@@ -28,7 +28,7 @@ export default (commandlineargs) => {
             replace({
                 'tag-name': TAG_NAME,
                 'container-tag-name': CONTAINER_TAG_NAME,
-                'versionStr': '1.0.0',
+                "versionStr": process.env.VERSION,
                 'preventAssignment': true
             }),
             svelte({
@@ -51,7 +51,7 @@ export default (commandlineargs) => {
             commonjs(),
             typescript({
                 sourceMap: !production,
-                inlineSources: true
+                inlineSources: !production
             }),
             production && terser()
         ],
