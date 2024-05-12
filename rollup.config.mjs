@@ -49,7 +49,7 @@ export default (commandlineargs) => {
             }),
             commonjs(),
             typescript({
-                sourceMap: !production,
+                sourceMap: true,
                 inlineSources: !production
             }),
             production && terser()
