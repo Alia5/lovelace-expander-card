@@ -29,7 +29,7 @@ declare global {
 
 /* eslint no-console: 0 */
 console.info(
-    `%c  Expander-Card Version \n%c ${version}`,
+    `%c  Expander-Card \n%c Version ${version}`,
     'color: orange; font-weight: bold; background: black',
     'color: white; font-weight: bold; background: dimgray'
 );
