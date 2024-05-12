@@ -102,7 +102,9 @@
     {/if}
     {#if config.cards}
         <div
-            style="--gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config['child-padding']}"
+            style="--gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config[
+                'child-padding'
+            ]}"
             class="children-container"
             use:collapse={{ open }}
         >
