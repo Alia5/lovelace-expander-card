@@ -28,7 +28,7 @@ export default (commandlineargs) => {
             replace({
                 'tag-name': TAG_NAME,
                 'container-tag-name': CONTAINER_TAG_NAME,
-                'versionStr': process.env.VERSION,
+                'versionStr': '1.0.0',
                 'preventAssignment': true
             }),
             svelte({
