@@ -15,7 +15,7 @@
     import { onMount } from 'svelte';
     const thisComponent = get_current_component();
 
-    let expanded = false;
+    let open = false;
 
     let isEditorMode = false;
 
@@ -44,10 +44,10 @@
     onMount(() => {
         isEditorMode = (thisComponent as HTMLElement).parentElement?.localName === 'hui-card-preview';
         if (isEditorMode) {
-            expanded = true;
+            open = true;
         } else {
             if (config.expanded !== undefined) {
-                setTimeout(() => (expanded = config.expanded as boolean), 100);
+                setTimeout(() => (open = config.expanded as boolean), 100);
             }
         }
     });
@@ -71,8 +71,7 @@
     style="--gap:{config.gap}; --padding:{config.padding}"
 >
     {#if config['title-card']}
-        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
-        >
+        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
@@ -82,26 +81,30 @@
                 ]};"
                 class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
                 on:click={() => {
-                    expanded = !expanded;
+                    open = !open;
                 }}
             >
-                <ha-icon icon="mdi:chevron-down" class={`primaryico ${expanded ? 'flipped' : ''}`} />
+                <ha-icon icon="mdi:chevron-down" class={`primaryico ${open ? 'flipped' : ''}`} />
             </button>
         </div>
     {:else}
         <button
             class="header ripple"
             on:click={() => {
-                expanded = !expanded;
+                open = !open;
             }}
             style="--button-background:{config['button-background']};"
         >
             <div class="primary title">{config.title}</div>
-            <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} />
+            <ha-icon icon="mdi:chevron-down" class={` primaryico ${open ? 'flipped' : ''}`} />
         </button>
     {/if}
     {#if config.cards}
-        <div style="--gap:{config.gap}; --child-padding:{config['child-padding']}" class="children-container" use:collapse={{ expanded }}>
+        <div
+            style="--gap:{config.gap}; --child-padding:{config['child-padding']}"
+            class="children-container"
+            use:collapse={{ open }}
+        >
             {#each config.cards as card (card)}
                 <Card {hass} config={card} type={card.type} />
             {/each}
@@ -114,13 +117,11 @@
         display: grid;
         gap: var(--gap);
         padding: var(--padding);
-        transition: all 0.3s ease-in-out;
     }
     .children-container {
         padding: var(--child-padding);
         display: grid;
         gap: var(--gap);
-        transition: all 0.3s ease-in-out;
     }
     .clear {
         background-color: transparent;
