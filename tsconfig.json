@@ -8,6 +8,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
+		"sourceMap": true,
 		"strict": true
 	},
     "include": ["src/**/*", "rollup.config.mjs"]
