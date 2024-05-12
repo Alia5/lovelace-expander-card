@@ -71,9 +71,7 @@
     style="--gap:{config.gap}; --padding:{config.padding}"
 >
     {#if config['title-card']}
-        <div
-            use:collapse={{ expanded }}
-            class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
+        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
         >
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
@@ -98,12 +96,12 @@
             }}
             style="--button-background:{config['button-background']};"
         >
-            <div use:collapse={{ expanded }} class="primary title">{config.title}</div>
+            <div class="primary title">{config.title}</div>
             <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} />
         </button>
     {/if}
     {#if config.cards}
-        <div style="--gap:{config.gap}; --child-padding:{config['child-padding']}" class="children-container">
+        <div style="--gap:{config.gap}; --child-padding:{config['child-padding']}" class="children-container" use:collapse={{ expanded }}>
             {#each config.cards as card (card)}
                 <Card {hass} config={card} type={card.type} />
             {/each}
