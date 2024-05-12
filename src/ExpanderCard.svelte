@@ -69,7 +69,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--gap {open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}"
+    style="--gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -102,7 +102,7 @@
     {/if}
     {#if config.cards}
         <div
-            style="--gap {open ? config['expanded-gap'] : config.gap}; --child-padding:{config['child-padding']}"
+            style="--gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config['child-padding']}"
             class="children-container"
             use:collapse={{ open }}
         >
