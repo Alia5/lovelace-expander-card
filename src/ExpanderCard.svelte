@@ -1,5 +1,5 @@
 <!-- eslint-disable-next-line svelte/valid-compile -->
-<svelte:options tag="expander-card" />
+<svelte:options tag="tag-name" />
 
 <script lang="ts">
     /* eslint-disable prettier/prettier */
@@ -34,7 +34,15 @@
         'button-background': 'transparent'
     };
 
-    const config: ExpanderConfig = defaults;
+    let config: ExpanderConfig = defaults;
+
+    // Home Assistant will call this with the config object!
+    // leave export let otherwise hass wil thro errors....
+    // eslint-disable-next-line svelte/no-unused-svelte-ignore
+    // svelte-ignore unused-export-let
+    export let setConfig = (conf = {}) => {
+        config = { ...defaults, ...conf };
+    };
 
     onMount(() => {
         isEditorMode = (thisComponent as HTMLElement).parentElement?.localName === 'hui-card-preview';
