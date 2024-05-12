@@ -34,12 +34,13 @@ export default (commandlineargs) => {
             svelte({
                 preprocess:
                 sveltePreprocess({
-                    sourceMap: !production
+                    sourceMap: true
                 }),
                 compilerOptions: {
                     customElement: true,
                     hydratable: true,
-                    dev: !production
+                    dev: true,
+
                 },
                 emitCss: true
             }),
@@ -50,7 +51,7 @@ export default (commandlineargs) => {
             commonjs(),
             typescript({
                 sourceMap: !production,
-                inlineSources: !production
+                inlineSources: true
             }),
             production && terser()
         ],

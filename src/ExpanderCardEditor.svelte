@@ -10,7 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<svelte:options tag="tag-name-editor" />
+<svelte:options tag="expander-card-editor" />
 
 <script lang="ts">
   /* eslint-disable prettier/prettier */
@@ -22,7 +22,7 @@ limitations under the License.
   const thisComponent = get_current_component();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let config: Partial<ExpanderConfig> & Record<string, any> = {};
+  const config: Partial<ExpanderConfig> & Record<string, any> = {};
 
   const configuratorElements: {
       [K in keyof Required<ExpanderConfig>]: [
@@ -121,14 +121,6 @@ limitations under the License.
               composed: true // makes the event jump shadow DOM boundary
           }
       );
-  };
-
-  // Home Assistant will call this with the config object!
-  // leave export let otherwise hass wil thro errors....
-  // eslint-disable-next-line svelte/no-unused-svelte-ignore
-  // svelte-ignore unused-export-let
-  export let setConfig = (conf = {}) => {
-      config = { ...config, ...conf };
   };
 
   let selectedTab = 0;
