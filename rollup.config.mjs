@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 
@@ -19,7 +19,7 @@ export default (commandlineargs) => {
     return ({
         input: 'src/index.ts',
         output: {
-            sourcemap: !production,
+            sourcemap: true,
             format: 'umd',
             name: MAIN_COMPONENT_NAME,
             file: `public/${FILE_NAME}`
