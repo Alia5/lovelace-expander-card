@@ -29,13 +29,11 @@ declare global {
 const version = 'versionStr';
 console.info(`ExpanderCard Version: ${version}`);
 
-const devMode = ('devModeValue' as string) === 'true';
-
 window.customCards = window.customCards || [];
 window.customCards.push(...[
     {
         type: 'tag-name',
-        name: `Expander Card${devMode ? '-dev' : ''}`,
+        name: 'Expander Card',
         preview: true,
         description: 'Expander card'
     }
