@@ -5,12 +5,9 @@
     /* eslint-disable prettier/prettier */
     import { default as Editor } from './ExpanderCardEditor.svelte';
 
-    import { fade } from 'svelte/transition';
-    import { cubicIn, cubicOut } from 'svelte/easing';
     import type { HomeAssistant } from 'custom-card-helpers';
     import Card from './Card.svelte';
-    import { flip } from 'svelte/animate';
-    import { quintOut } from 'svelte/easing';
+    import collapse from 'svelte-collapse';
 
     // hack get reference to own component
     import { get_current_component } from 'svelte/internal';
@@ -74,7 +71,10 @@
     style="--gap:{config.gap}; --padding:{config.padding}"
 >
     {#if config['title-card']}
-        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
+        <div
+            use:collapse={{ expanded }}
+            class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}
+        >
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
@@ -98,21 +98,14 @@
             }}
             style="--button-background:{config['button-background']};"
         >
-            <div class="primary title">{config.title}</div>
+            <div use:collapse={{ expanded }} class="primary title">{config.title}</div>
             <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} />
         </button>
     {/if}
-    {#if config.cards && expanded}
+    {#if config.cards}
         <div style="--gap:{config.gap}; --child-padding:{config['child-padding']}" class="children-container">
             {#each config.cards as card (card)}
-                <div class="child-card" animate:flip={{ delay: 250, duration: 250, easing: quintOut }}>
-                    <div
-                        in:fade={{ duration: 500, easing: cubicOut }}
-                        out:fade={{ duration: 250, easing: cubicIn }}
-                    >
-                        <Card {hass} config={card} type={card.type} />
-                    </div>
-                </div>
+                <Card {hass} config={card} type={card.type} />
             {/each}
         </div>
     {/if}

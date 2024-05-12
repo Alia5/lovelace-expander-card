@@ -26,9 +26,6 @@ declare global {
     }
 }
 
-const version = 'versionStr';
-console.info(`ExpanderCard Version: ${version}`);
-
 window.customCards = window.customCards || [];
 window.customCards.push(...[
     {
