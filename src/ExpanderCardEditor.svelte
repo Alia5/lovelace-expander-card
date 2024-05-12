@@ -51,6 +51,9 @@ limitations under the License.
         'gap': ['string', {
             label: 'Gap between cards'
         }],
+        'expanded-gap': ['string', {
+            label: 'Gap between cards when open'
+        }],
         'padding': ['string', {
             label: 'Padding of all card content'
         }],

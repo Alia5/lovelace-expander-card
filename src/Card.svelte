@@ -40,6 +40,7 @@ limitations under the License.
                 void (async () => {
                     const el = (await cardUtil).createCardElement(config);
                     el.hass = p.hass;
+                    node.setAttribute('style', 'display:inherit');
                     node.innerHTML = '';
                     node.appendChild(el);
                     loading = false;
