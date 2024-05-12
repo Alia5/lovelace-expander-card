@@ -10,7 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<svelte:options tag="expander-sub-card" />
+<svelte:options tag="expander-child-card" />
 
 <script lang="ts">
   import type { HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
