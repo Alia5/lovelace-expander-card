@@ -1,13 +1,19 @@
 # Expander Card for HomeAssistant
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Alia5/lovelace-expander-card?color=green&label=release)
-![GitHub all releases](https://img.shields.io/github/downloads/Alia5/lovelace-expander-card/total)
-![GitHub Repo stars](https://img.shields.io/github/stars/Alia5/lovelace-expander-card)
+[![hacs][hacs-badge]][hacs-url]
+[![release][release-badge]][release-url]
+![downloads][downloads-badge]
+![build][build-badge]
+
 
 Expander/Collapsible card for HomeAssistant  
 
+## Introduction
 
-Please ⭐️ or sponsor this repo if you find it useful.
+First a few words to start with. A big thank you goes to @Alia5 (https://github.com/Alia5/lovelace-expander-card), who initially launched the card. I forked this card for my own HomeAssistant to make a few improvements. I give no guarantee for the functionality and no promise of lifelong maintenance, as I do the whole thing in my free time. Of course, I am happy about every contribution and PR
+
+
+Please ⭐️ or sponsor this repo when you like it.
 
 ## Demo
 
@@ -58,34 +64,39 @@ Yaml:
 
 ## Installation
 
-### Hacs
+### HACS
 
-Add this repository via HACS Custom repositories
+Expander-Card is not available in [HACS][hacs] (Home Assistant Community Store) by default, but you can add it as custom repositories.
 
-https://github.com/Alia5/lovelace-expander-card
+1. Install HACS if you don't have it already
+2. Open HACS in Home Assistant 
+3. Add this repository (https://github.com/MelleD/lovelace-expander-card) via HACS Custom repositories ([How to add Custom Repositories](https://hacs.xyz/docs/faq/custom_repositories/))
 
-([How to add Custom Repositories](https://hacs.xyz/docs/faq/custom_repositories/))
 
 ### Manual
-#### 1. Download the card
 
-Install the `expander-card` card by copying `expander-card.js` to `<config directory>/www/expander-card.js`
+1. Download `expander-card.js` file from the [latest release][release-url].
+2. Put `expander-card.js` file into your `config/www` folder.
+3. Add reference to `expander-card.js` in Dashboard. There's two way to do that:
+    - **Using UI:** _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/expander-card.js` → Set _Resource type_ as `JavaScript Module`.
+      **Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
+    - **Using YAML:** Add following code to `lovelace` section.
+        ```yaml
+        resources:
+            - url: /local/expander-card.js
+              type: module
+        ```
 
-Bash:
+<!-- Badges -->
 
-```bash
-wget https://github.com/Alia5/lovelace-expander-card/releases/download/latest/expander-card.js
-mv expander-card.js /config/www/
-```
+[hacs-url]: https://github.com/hacs/integration
+[hacs-badge]: https://img.shields.io/badge/hacs-default-orange.svg?style=flat-square
+[release-badge]: https://img.shields.io/github/v/release/MelleD/lovelace-expander-card?style=flat-square
+[downloads-badge]: https://img.shields.io/github/downloads/MelleD/lovelace-expander-card/total?style=flat-square
+[build-badge]: https://img.shields.io/github/actions/workflow/status/MelleD/lovelace-expander-card/build.yml?branch=main&style=flat-square
 
-#### 2. Link the card to your lovelace ui
+<!-- References -->
 
-##### The manual way:
-
-Link `expander-card` inside your `ui-lovelace.yaml`
-
-```yaml
-resources:
-  - url: /local/expander-card.js
-    type: js
-```
+[home-assistant]: https://www.home-assistant.io/
+[hacs]: https://hacs.xyz
+[release-url]: https://github.com/MelleD/lovelace-expander-card/releases
