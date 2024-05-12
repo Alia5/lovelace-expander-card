@@ -24,6 +24,7 @@ module.exports = {
                 extraFileExtensions: ['.svelte'],
             },
             rules: {
+                'no-console': 'off',
                 'prettier/prettier': ['warn', {
                     "tabWidth": 4,
                     "bracketSpacing": true,
