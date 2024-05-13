@@ -4,7 +4,9 @@
 ![downloads][downloads-badge]
 ![build][build-badge]
 
-<a href="https://www.paypal.me/MelleDennis" target="_blank"><img src="https://www.paypalobjects.com/webstatic/paypalme/images/social/pplogo384.png" alt="PayPal.Me MelleDennis" style="height: 50px !important;width: 50px !important;" ></a>
+<a href="https://www.paypal.me/MelleDennis" target="_blank"><img src="https://github.com/MelleD/lovelace-expander-card/blob/main/docs/images/pplogo.png" alt="PayPal.Me MelleDennis" style="height: 50px !important;width: 50px !important;" ></a>
+
+<a href="https://www.buymeacoffee.com/melled" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 
 Expander/Collapsible card for HomeAssistant  
@@ -73,6 +75,8 @@ Expander-Card is not available in [HACS][hacs] (Home Assistant Community Store) 
 1. Install HACS if you don't have it already
 2. Open HACS in Home Assistant 
 3. Add this repository (https://github.com/MelleD/lovelace-expander-card) via HACS Custom repositories ([How to add Custom Repositories](https://hacs.xyz/docs/faq/custom_repositories/))
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=MelleD&repository=lovelace-expander-card&category=plugin)
 
 
 ### Manual
