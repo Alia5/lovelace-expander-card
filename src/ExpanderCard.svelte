@@ -88,7 +88,7 @@
                     open = !open;
                 }}
             >
-                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`primaryico ${open ? 'flipped' : ''}`} />
+                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
             </button>
         </div>
     {:else}
@@ -100,7 +100,7 @@
             style="--button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class="primary title">{config.title}</div>
-            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={` primaryico ${open ? 'flipped' : ''}`} />
+            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
         </button>
     {/if}
     {#if config.cards}
