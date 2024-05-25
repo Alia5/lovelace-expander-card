@@ -29,7 +29,10 @@
         'title': " ",
         'overlay-margin': '0.0em',
         'child-padding': '0.0em',
-        'button-background': 'transparent'
+        'button-background': 'transparent',
+        'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
+        'header-color': 'var(--primary-text-color,#fff)',
+        'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))'
     };
 
     let config: ExpanderConfig = defaults;
@@ -69,7 +72,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}"
+    style="--gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -79,13 +82,13 @@
             <button
                 style="--overlay-margin:{config['overlay-margin']}; --button-background:{config[
                     'button-background'
-                ]};"
+                ]}; --header-color:{config['header-color']};"
                 class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
                 on:click={() => {
                     open = !open;
                 }}
             >
-                <ha-icon icon="mdi:chevron-down" class={`primaryico ${open ? 'flipped' : ''}`} />
+                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`primaryico ${open ? 'flipped' : ''}`} />
             </button>
         </div>
     {:else}
@@ -94,10 +97,10 @@
             on:click={() => {
                 open = !open;
             }}
-            style="--button-background:{config['button-background']};"
+            style="--button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class="primary title">{config.title}</div>
-            <ha-icon icon="mdi:chevron-down" class={` primaryico ${open ? 'flipped' : ''}`} />
+            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={` primaryico ${open ? 'flipped' : ''}`} />
         </button>
     {/if}
     {#if config.cards}
@@ -120,7 +123,7 @@
         display: block grid;
         gap: var(--gap);
         padding: var(--padding);
-        background: var(--expander-card-background,var(--ha-card-background,var(--card-background-color,#fff))) !important;
+        background: var(--expander-card-background,#fff) !important;
     }
     .children-container {
         padding: var(--child-padding);
@@ -153,7 +156,7 @@
         margin: 2px;
         background: var(--button-background);
         border-style: none;
-        color: var(--header-color,var(--primary-text-color,#fff));
+        color: var(--header-color,#fff);
     }
     .header-overlay {
         position: absolute;
@@ -166,7 +169,7 @@
         text-align: left;
     }
     .ico {
-        color: var(--arrow-color,var(--primary-text-color,#fff));
+        color: var(--arrow-color,#fff);
         transition-property: transform;
         transition-duration: 0.35s;
     }

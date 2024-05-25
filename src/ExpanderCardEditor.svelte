@@ -45,8 +45,17 @@ limitations under the License.
         'expanded': ['boolean', {
             label: 'Start expanded (Always expanded in editor)'
         }],
+        'expander-card-background': ['string', {
+            label: 'Expander Card Background (CSS color)'
+        }],
+        'header-color': ['string', {
+            label: 'Color of expand button (CSS color)'
+        }],
         'button-background': ['string', {
-            label: 'Button background (CSS color'
+            label: 'Button background (CSS color)'
+        }],
+        'arrow-color': ['string', {
+            label: 'Arrow Color of expand button (CSS color)'
         }],
         'gap': ['string', {
             label: 'Gap between cards'
