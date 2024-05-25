@@ -26,9 +26,9 @@
         'expanded-gap': '0.6em',
         'padding': '1em',
         'clear': false,
-        'title': 'Expander',
-        'overlay-margin': '2em',
-        'child-padding': '0.5em',
+        'title': " ",
+        'overlay-margin': '0.0em',
+        'child-padding': '0.0em',
         'button-background': 'transparent'
     };
 
