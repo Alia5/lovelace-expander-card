@@ -117,7 +117,7 @@
 
 <style>
     .expander-card {
-        display: grid;
+        display: block grid;
         gap: var(--gap);
         padding: var(--padding);
     }
