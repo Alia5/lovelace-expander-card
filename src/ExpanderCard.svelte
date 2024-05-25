@@ -120,6 +120,7 @@
         display: block grid;
         gap: var(--gap);
         padding: var(--padding);
+        background: var(--expander-card-background,var(--ha-card-background,var(--card-background-color,#fff))) !important;
     }
     .children-container {
         padding: var(--child-padding);
@@ -127,8 +128,9 @@
         gap: var(--gap);
     }
     .clear {
-        background-color: transparent;
-        border-style: none;
+        background: none !important;
+        background-color: transparent !important;
+        border-style: none !important;
     }
     .title-card-header {
         display: flex;
@@ -151,6 +153,7 @@
         margin: 2px;
         background: var(--button-background);
         border-style: none;
+        color: var(--header-color,var(--primary-text-color,#fff));
     }
     .header-overlay {
         position: absolute;
@@ -163,7 +166,7 @@
         text-align: left;
     }
     .ico {
-        color: var(--primary-text-color);
+        color: var(--arrow-color,var(--primary-text-color,#fff));
         transition-property: transform;
         transition-duration: 0.35s;
     }
