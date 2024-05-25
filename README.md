@@ -55,7 +55,10 @@ Yaml:
 | title                     | string   | Empty         | *                      | Title (Not displayed if using Title-Card)             |
 | clear                     | boolean  | _false_       | true\|false            | Remove Background                                     |
 | expanded                  | boolean  | _false_       | true\|false            | Start expanded                                        |
+| expander-card-background  | string   | ha-card-background, card-background-color,#fff | css-color              | Expander Card Background |
+| header-color              | string   | primary-text-color,#fff  | css-color   | Color of expand button                     |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |
+| arrow-color               | string   | primary-text-color,#fff | css-color    | Color of ico expand button                     |
 | gap                       | string   | _0.0em_       | css-size               | gap between cards when expander closed                |
 | expanded-gap              | string   | _0.6em_       | css-size               | gap between child cards when expander open            |
 | padding                   | string   | _1em_         | css-size               | padding of all card content                           |
@@ -65,6 +68,7 @@ Yaml:
 | title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
 | overlay-margin            | string   | _0.0em_       | css-size               | Margin from top right of expander button (if overlay) |
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
+
 
 ## Installation
 
