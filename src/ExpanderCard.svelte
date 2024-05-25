@@ -127,7 +127,7 @@
     }
     .children-container {
         padding: var(--child-padding);
-        display: grid;
+        display: block grid;
         gap: var(--gap);
     }
     .clear {
