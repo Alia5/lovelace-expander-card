@@ -73,7 +73,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
+    style="--expander-card-display:{config['title-card'] ? "grid" : config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
