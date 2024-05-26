@@ -98,7 +98,7 @@
             on:click={() => {
                 open = !open;
             }}
-            style="--button-background:{config['button-background']};--header-color:{config['header-color']};"
+            style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class="primary title">{config.title}</div>
             <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
@@ -106,7 +106,7 @@
     {/if}
     {#if config.cards}
         <div
-            style="--gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config[
+            style="--expander-card-display:{config['title-card'] ? "grid" : config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config[
                 'child-padding'
             ]}"
             class="children-container"
@@ -157,7 +157,7 @@
         margin: 2px;
         background: var(--button-background);
         border-style: none;
-        width: 100%;
+        width: var(--header-width,auto);
         color: var(--header-color,#fff);
     }
     .header-overlay {
