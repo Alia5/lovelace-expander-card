@@ -33,7 +33,7 @@
         'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
         'header-color': 'var(--primary-text-color,#fff)',
         'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
-        'expander-card-display': 'block',
+        'expander-card-display': 'block'
     };
 
     let config: ExpanderConfig = defaults;
