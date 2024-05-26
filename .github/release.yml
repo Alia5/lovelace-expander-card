@@ -5,7 +5,7 @@ changelog:
         - dependencies
     - title: 🐛 Bug fixes
       labels:
-        - bugfix
+        - bug
     - title: ⭐ New Features
       labels:
         - "*"
