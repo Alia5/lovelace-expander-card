@@ -32,7 +32,8 @@
         'button-background': 'transparent',
         'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
         'header-color': 'var(--primary-text-color,#fff)',
-        'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))'
+        'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
+        'expander-card-display': 'block',
     };
 
     let config: ExpanderConfig = defaults;
@@ -72,7 +73,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
+    style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -120,14 +121,14 @@
 
 <style>
     .expander-card {
-        display: block grid;
+        display: var(--expander-card-display,block);
         gap: var(--gap);
         padding: var(--padding);
         background: var(--expander-card-background,#fff) !important;
     }
     .children-container {
         padding: var(--child-padding);
-        display: block grid;
+        display: var(--expander-card-display,block);
         gap: var(--gap);
     }
     .clear {
@@ -156,6 +157,7 @@
         margin: 2px;
         background: var(--button-background);
         border-style: none;
+        width: 100%;
         color: var(--header-color,#fff);
     }
     .header-overlay {

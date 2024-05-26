@@ -29,4 +29,5 @@ export interface ExpanderConfig {
     'header-color'?: string;
     'button-background': string;
     'arrow-color'?: string;
+    'expander-card-display'?: string;
 }

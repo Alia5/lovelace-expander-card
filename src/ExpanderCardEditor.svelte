@@ -86,6 +86,9 @@ limitations under the License.
             cond: (conf) => !!conf['title-card-button-overlay']
 
         }],
+        'expander-card-display': ['string', {
+            label: 'Display/Layout of the Card'
+        }],
         'cards': ['card[]']
     };
 

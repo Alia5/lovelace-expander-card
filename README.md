@@ -68,6 +68,7 @@ Yaml:
 | title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
 | overlay-margin            | string   | _0.0em_       | css-size               | Margin from top right of expander button (if overlay) |
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
+| expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
 
 
 ## Installation
