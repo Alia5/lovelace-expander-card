@@ -3,6 +3,9 @@ changelog:
     - title: 🛠 Dependency Upgrades 
       labels:
         - dependencies
+    - title: 🐛 Bug fixes
+      labels:
+        - bugfix
     - title: ⭐ New Features
       labels:
         - "*"
