@@ -19,17 +19,19 @@ limitations under the License.
     import { cardUtil } from './cardUtil';
 
     export let type = 'div';
+    export let marginTop ='0px';
     export let config: LovelaceCardConfig;
     export let hass: HomeAssistant;
+
 
     let loading = true;
     const uplift = (
         node: HTMLElement,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        p: { type: string; hass: HomeAssistant }
+        p: { marginTop: string; type: string; hass: HomeAssistant }
     ) => ({
         // eslint-disable-next-line no-shadow
-        update: (p: { type: string; hass: HomeAssistant }) => {
+        update: (p: { marginTop: string; type: string; hass: HomeAssistant }) => {
             if (node) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 if ((node.firstChild as any)?.tagName) {
@@ -40,8 +42,7 @@ limitations under the License.
                 void (async () => {
                     const el = (await cardUtil).createCardElement(config);
                     el.hass = p.hass;
-                    el.setAttribute('style', 'display:inherit');
-                    node.setAttribute('style', 'display:inherit');
+                    node.setAttribute('style', 'margin-top: ' + p.marginTop + ';');
                     node.innerHTML = '';
                     node.appendChild(el);
                     loading = false;
@@ -51,7 +52,7 @@ limitations under the License.
     });
 </script>
 
-<div use:uplift={{ type, hass }} />
+<div use:uplift={{ marginTop, type, hass }} />
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}

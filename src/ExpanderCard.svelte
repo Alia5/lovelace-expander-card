@@ -29,6 +29,7 @@
         'title': " ",
         'overlay-margin': '0.0em',
         'child-padding': '0.0em',
+        'child-margin-top': '0.0em',
         'button-background': 'transparent',
         'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
         'header-color': 'var(--primary-text-color,#fff)',
@@ -73,7 +74,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--expander-card-display:{config['title-card'] ? "grid" : config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
+    style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -106,14 +107,14 @@
     {/if}
     {#if config.cards}
         <div
-            style="--expander-card-display:{config['title-card'] ? "grid" : config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config[
+            style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config[
                 'child-padding'
             ]}"
             class="children-container"
             use:collapse={{ open }}
         >
             {#each config.cards as card (card)}
-                <Card {hass} config={card} type={card.type} />
+                <Card {hass} config={card} type={card.type} marginTop={config['child-margin-top']}/>
             {/each}
         </div>
     {/if}
