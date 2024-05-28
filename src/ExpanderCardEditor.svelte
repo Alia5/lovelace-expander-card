@@ -69,6 +69,9 @@ limitations under the License.
         'child-padding': ['string', {
             label: 'Padding of child cards'
         }],
+        'child-margin-top': ['string', {
+            label: 'Margin top of child cards'
+        }],
         'title-card': ['card', {
             label: 'Title card'
         }],

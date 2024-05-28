@@ -24,6 +24,7 @@ export interface ExpanderConfig {
     'title-card-button-overlay'?: false;
     'overlay-margin'?: string;
     'child-padding'?: string;
+    'child-margin-top'?: string;
     expanded?: boolean;
     'expander-card-background'?: string;
     'header-color'?: string;
