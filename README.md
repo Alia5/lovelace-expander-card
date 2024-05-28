@@ -63,6 +63,7 @@ Yaml:
 | expanded-gap              | string   | _0.6em_       | css-size               | gap between child cards when expander open            |
 | padding                   | string   | _1em_         | css-size               | padding of all card content                           |
 | child-padding             | string   | _0.0em_       | css-size               | padding of child cards                                |
+| child-margin-top          | string   | _0.0em_       | css-size               | Margin top of child cards                             |
 | title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                               |
 | title-card-padding        | string   | _0px_         | css-size               | padding of title-card                                 |
 | title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
