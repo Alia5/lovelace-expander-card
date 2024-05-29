@@ -120,6 +120,7 @@ Please ⭐️ or sponsor this repo when you like it.
 [hacs-url]: https://github.com/hacs/integration
 [home-assistant]: https://www.home-assistant.io/
 [hacs]: https://hacs.xyz
-[release-url]: https://github.com/MelleD/lovelace-expander-card/releases[paypal-me-url]: https://www.paypal.me/MelleDennis
+[release-url]: https://github.com/MelleD/lovelace-expander-card/releases
+[paypal-me-url]: https://www.paypal.me/MelleDennis
 [buy-me-a-coffee-url]: https://www.buymeacoffee.com/melled
 
