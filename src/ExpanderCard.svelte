@@ -34,7 +34,8 @@
         'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
         'header-color': 'var(--primary-text-color,#fff)',
         'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
-        'expander-card-display': 'block'
+        'expander-card-display': 'block',
+        'title-card-clickable': false
     };
 
     let config: ExpanderConfig = defaults;
@@ -78,6 +79,11 @@
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
+            {#if config['title-card-clickable']}
+            on:click={() => {
+                open = !open;
+            }}
+            {/if}
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
