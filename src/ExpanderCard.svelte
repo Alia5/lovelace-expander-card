@@ -71,15 +71,21 @@
     });
 
 
-let element: HTMLElement;
+    let element: HTMLElement;
 
-onMount(() => {
-  if (config['title-card-clickable']) {
-    element.addEventListener('click', () => {
-        open = !open;
+    onMount(() => {
+        if (config['title-card-clickable']) {
+            if(element.tagName === 'DIV') {
+                element.addEventListener('click', () => {
+                open = !open;
+            });
+            }
+        }else{
+            element.addEventListener('click', () => {
+                open = !open;
+            });
+        }
     });
-  }
-});
 </script>
 
 <ha-card
