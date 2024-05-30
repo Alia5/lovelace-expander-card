@@ -97,14 +97,11 @@
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
-            <button
+            <button bind:this={element}
                 style="--overlay-margin:{config['overlay-margin']}; --button-background:{config[
                     'button-background'
                 ]}; --header-color:{config['header-color']};"
                 class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
-                on:click={() => {
-                    open = !open;
-                }}
             >
                 <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
             </button>
