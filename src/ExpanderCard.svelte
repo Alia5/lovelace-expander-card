@@ -49,6 +49,7 @@
     };
 
     onMount(() => {
+        console.info("On Mount 1")
         isEditorMode = (thisComponent as HTMLElement).parentElement?.localName === 'hui-card-preview';
         if (isEditorMode) {
             open = true;
@@ -71,15 +72,22 @@
     });
 
 
-let element: HTMLElement;
+    let element: HTMLElement;
 
-onMount(() => {
-  if (config['title-card-clickable']) {
-    element.addEventListener('click', () => {
-        open = !open;
+    onMount(() => {
+        console.info("On Mount clickable")
+        if (config['title-card-clickable']) {
+            if(element.tagName == 'DIV') {
+                element.addEventListener('click', () => {
+                open = !open;
+            });
+            }
+        }else{
+            element.addEventListener('click', () => {
+                open = !open;
+            }); 
+        }
     });
-  }
-});
 </script>
 
 <ha-card
