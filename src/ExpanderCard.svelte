@@ -34,7 +34,8 @@
         'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
         'header-color': 'var(--primary-text-color,#fff)',
         'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
-        'expander-card-display': 'block'
+        'expander-card-display': 'block',
+        'title-card-clickable': false
     };
 
     let config: ExpanderConfig = defaults;
@@ -69,7 +70,16 @@
         ...defaults
     });
 
-    /* eslint-enable prettier/prettier */
+
+let element: HTMLElement;
+
+onMount(() => {
+  if (config['title-card-clickable']) {
+    element.addEventListener('click', () => {
+        open = !open;
+    });
+  }
+});
 </script>
 
 <ha-card
@@ -77,7 +87,7 @@
     style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
-        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
+        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`} bind:this={element}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>

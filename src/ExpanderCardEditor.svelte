@@ -84,6 +84,10 @@ limitations under the License.
             cond: (conf) => conf['title-card'] !== undefined
 
         }],
+        'title-card-clickable':['boolean', {
+            label: 'Should the title card clickable'
+
+        }],
         'overlay-margin': ['string', {
             label: 'Margin of overlay button',
             cond: (conf) => !!conf['title-card-button-overlay']

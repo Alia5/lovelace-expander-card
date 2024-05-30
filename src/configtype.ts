@@ -22,6 +22,7 @@ export interface ExpanderConfig {
     'title-card'?: LovelaceCardConfig;
     'title-card-padding'?: string;
     'title-card-button-overlay'?: false;
+    'title-card-clickable'?: boolean;
     'overlay-margin'?: string;
     'child-padding'?: string;
     'child-margin-top'?: string;

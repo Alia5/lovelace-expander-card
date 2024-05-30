@@ -63,6 +63,7 @@ Yaml:
 | title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                               |
 | title-card-padding        | string   | _0px_         | css-size               | padding of title-card                                 |
 | title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
+| title-card-clickable      | boolean  | _false_       | true\|false            | Should the complete diff clickable?                   |
 | overlay-margin            | string   | _0.0em_       | css-size               | Margin from top right of expander button (if overlay) |
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
 | expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
