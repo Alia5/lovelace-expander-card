@@ -185,7 +185,7 @@
         text-align: left;
     }
     .ico {
-        color: var(--arrow-color,#fff);
+        color: var(--arrow-color,var(--primary-text-color,#fff));
         transition-property: transform;
         transition-duration: 0.35s;
     }
