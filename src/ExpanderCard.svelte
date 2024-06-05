@@ -108,10 +108,8 @@
         </div>
     {:else}
         <button
+            bind:this={element}
             class="header ripple"
-            on:click={() => {
-                open = !open;
-            }}
             style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class="primary title">{config.title}</div>
