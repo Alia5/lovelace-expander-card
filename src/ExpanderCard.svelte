@@ -74,18 +74,20 @@
     let element: HTMLElement;
 
     onMount(() => {
-        if (config['title-card-clickable']) {
-            if(element.tagName === 'DIV') {
-                element.addEventListener('click', () => {
-                open = !open;
-            });
-            }
-        }else{
-            element.addEventListener('click', () => {
+    if (config["title-card-clickable"]) { 
+        if (element.parentElement) {
+            element.parentElement.addEventListener("click", () => {
                 open = !open;
             });
         }
-    });
+      return;
+    }
+    if (element.tagName === "BUTTON") {
+        element.addEventListener("click", () => {
+          open = !open;
+        }); 
+    }
+  });
 </script>
 
 <ha-card
@@ -93,7 +95,7 @@
     style="--expander-card-display:{config['expander-card-display']}; --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding}; --expander-card-background:{config['expander-card-background']}"
 >
     {#if config['title-card']}
-        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`} bind:this={element}>
+        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
