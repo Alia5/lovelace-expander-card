@@ -74,7 +74,7 @@
     let element: HTMLElement;
 
     onMount(() => {
-    if (config["title-card-clickable"]) { 
+    if (config["title-card-clickable"]) {
         if (element.parentElement) {
             element.parentElement.addEventListener("click", () => {
                 open = !open;
@@ -85,7 +85,7 @@
     if (element.tagName === "BUTTON") {
         element.addEventListener("click", () => {
           open = !open;
-        }); 
+        });
     }
   });
 </script>
