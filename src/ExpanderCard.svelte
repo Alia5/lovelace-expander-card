@@ -17,6 +17,8 @@
 
     let open = false;
 
+    let isListenerAdded = false;
+
     let isEditorMode = false;
 
     export let hass: HomeAssistant;
@@ -74,8 +76,14 @@
     let element: HTMLElement;
 
     onMount(() => {
+
+    if(isListenerAdded) {
+        return;
+    }
+
     if (config["title-card-clickable"]) {
         if (element.parentElement) {
+            isListenerAdded = true;
             element.parentElement.addEventListener("click", () => {
                 open = !open;
             });
@@ -83,6 +91,7 @@
       return;
     }
     if (element.tagName === "BUTTON") {
+        isListenerAdded = true;
         element.addEventListener("click", () => {
           open = !open;
         });
