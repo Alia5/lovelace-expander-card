@@ -37,7 +37,9 @@
         'header-color': 'var(--primary-text-color,#fff)',
         'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
         'expander-card-display': 'block',
-        'title-card-clickable': false
+        'title-card-clickable': false,
+        'min-width-expanded': 0,
+        'max-width-expanded': 0
     };
 
     let config: ExpanderConfig = defaults;
@@ -56,7 +58,22 @@
             open = true;
         } else {
             if (config.expanded !== undefined) {
-                setTimeout(() => (open = config.expanded as boolean), 100);
+                const min_width_expanded = config['min-width-expanded'] as number;
+                const max_width_expanded = config['max-width-expanded'] as number;
+                const offsetWidth = document.body.offsetWidth;
+
+                if (min_width_expanded && max_width_expanded) {
+                    config.expanded = offsetWidth >= min_width_expanded && offsetWidth <= max_width_expanded;
+                } else if (min_width_expanded) {
+                    config.expanded = offsetWidth >= min_width_expanded;
+                } else if (max_width_expanded) {
+                    config.expanded = offsetWidth <= max_width_expanded;
+                }
+
+                setTimeout(() => {
+                    open = config.expanded as boolean;
+                    config.expanded = undefined;
+                }, 100);
             }
         }
     });

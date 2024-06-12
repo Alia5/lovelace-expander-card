@@ -32,4 +32,6 @@ export interface ExpanderConfig {
     'button-background': string;
     'arrow-color'?: string;
     'expander-card-display'?: string;
+    'min-width-expanded'?: number;
+    'max-width-expanded'?: number;
 }

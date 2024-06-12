@@ -45,6 +45,12 @@ limitations under the License.
         'expanded': ['boolean', {
             label: 'Start expanded (Always expanded in editor)'
         }],
+        'min-width-expanded': ['number', {
+            label: 'Min screen width (px) to be expanded on start (use with start expanded above)'
+        }],
+        'max-width-expanded': ['number', {
+            label: 'Max screen width (px) to be expanded on start (use with start expanded above)'
+        }],
         'expander-card-background': ['string', {
             label: 'Expander Card Background (CSS color)'
         }],
@@ -198,6 +204,17 @@ limitations under the License.
                     configValue={config[key]}
                     on:input={passEv((ev) => {
                         config[key] = ev?.target?.value;
+                    })}
+                />
+            {/if}
+            {#if type === 'number' && (!extra?.cond || extra?.cond(config))}
+                <ha-textfield
+                    label={extra?.label || key}
+                    value={config[key] ?? ''}
+                    configValue={config[key]}
+                    type="number"
+                    on:input={passEv((ev) => {
+                        config[key] = parseInt(ev?.target?.value);
                     })}
                 />
             {/if}
