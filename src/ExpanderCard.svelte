@@ -57,23 +57,20 @@
         if (isEditorMode) {
             open = true;
         } else {
+            const minWidthExpanded = config['min-width-expanded'] as number;
+            const maxWidthExpanded = config['max-width-expanded'] as number;
+            const offsetWidth = document.body.offsetWidth;
+
+            if (minWidthExpanded && maxWidthExpanded) {
+                config.expanded = offsetWidth >= minWidthExpanded && offsetWidth <= maxWidthExpanded;
+            } else if (minWidthExpanded) {
+                config.expanded = offsetWidth >= minWidthExpanded;
+            } else if (maxWidthExpanded) {
+                config.expanded = offsetWidth <= maxWidthExpanded;
+            }
+
             if (config.expanded !== undefined) {
-                const min_width_expanded = config['min-width-expanded'] as number;
-                const max_width_expanded = config['max-width-expanded'] as number;
-                const offsetWidth = document.body.offsetWidth;
-
-                if (min_width_expanded && max_width_expanded) {
-                    config.expanded = offsetWidth >= min_width_expanded && offsetWidth <= max_width_expanded;
-                } else if (min_width_expanded) {
-                    config.expanded = offsetWidth >= min_width_expanded;
-                } else if (max_width_expanded) {
-                    config.expanded = offsetWidth <= max_width_expanded;
-                }
-
-                setTimeout(() => {
-                    open = config.expanded as boolean;
-                    config.expanded = undefined;
-                }, 100);
+                setTimeout(() => (open = config.expanded as boolean), 100);
             }
         }
     });
