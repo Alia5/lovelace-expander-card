@@ -51,6 +51,8 @@ Yaml:
 | title                     | string   | Empty         | *                      | Title (Not displayed if using Title-Card)             |
 | clear                     | boolean  | _false_       | true\|false            | Remove Background                                     |
 | expanded                  | boolean  | _false_       | true\|false            | Start expanded                                        |
+| min-width-expanded        | number   | 0             | number                 | Min screen width (px) to be expanded on start (use with start expanded above)                                     |
+| max-width-expanded        | number   | 0             | number            | Max screen width (px) to be expanded on start (use with start expanded above)                                        |
 | expander-card-background  | string   | ha-card-background, card-background-color,#fff | css-color              | Expander Card Background |
 | header-color              | string   | primary-text-color,#fff  | css-color   | Color of expand button                     |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |

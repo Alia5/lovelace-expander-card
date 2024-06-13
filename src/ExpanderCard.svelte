@@ -37,7 +37,9 @@
         'header-color': 'var(--primary-text-color,#fff)',
         'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
         'expander-card-display': 'block',
-        'title-card-clickable': false
+        'title-card-clickable': false,
+        'min-width-expanded': 0,
+        'max-width-expanded': 0
     };
 
     let config: ExpanderConfig = defaults;
@@ -55,6 +57,18 @@
         if (isEditorMode) {
             open = true;
         } else {
+            const minWidthExpanded = config['min-width-expanded'] as number;
+            const maxWidthExpanded = config['max-width-expanded'] as number;
+            const offsetWidth = document.body.offsetWidth;
+
+            if (minWidthExpanded && maxWidthExpanded) {
+                config.expanded = offsetWidth >= minWidthExpanded && offsetWidth <= maxWidthExpanded;
+            } else if (minWidthExpanded) {
+                config.expanded = offsetWidth >= minWidthExpanded;
+            } else if (maxWidthExpanded) {
+                config.expanded = offsetWidth <= maxWidthExpanded;
+            }
+
             if (config.expanded !== undefined) {
                 setTimeout(() => (open = config.expanded as boolean), 100);
             }
