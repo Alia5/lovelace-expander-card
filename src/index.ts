@@ -10,10 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-export { default as default } from './ExpanderCard.svelte';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { cardUtil } from './cardUtil';
+export { default } from './ExpanderCard.svelte';
 import { version } from '../package.json';
 // Make Typescript Happy!
 declare global {
