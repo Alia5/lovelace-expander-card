@@ -28,6 +28,7 @@ export interface ExpanderConfig {
     'child-margin-top'?: string;
     expanded?: boolean;
     'expander-card-background'?: string;
+    'expander-card-background-expanded'?: string;
     'header-color'?: string;
     'button-background': string;
     'arrow-color'?: string;

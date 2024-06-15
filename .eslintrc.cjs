@@ -218,7 +218,7 @@ module.exports = {
         'max-len': [
             'warn',
             {
-                code: 140
+                code: 160
             }
         ],
         'dot-notation': 'error',

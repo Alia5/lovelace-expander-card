@@ -55,6 +55,7 @@ Yaml:
 | min-width-expanded        | number   | 0             | number                 | Min screen width (px) to be expanded on start (use with start expanded above)                                     |
 | max-width-expanded        | number   | 0             | number            | Max screen width (px) to be expanded on start (use with start expanded above)                                        |
 | expander-card-background  | string   | ha-card-background, card-background-color,#fff | css-color              | Expander Card Background |
+| expander-card-background-expanded    | string   |  Empty    | css-color              | Expander Card Background when card is opened/expanded|
 | header-color              | string   | primary-text-color,#fff  | css-color   | Color of expand button                     |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |
 | arrow-color               | string   | primary-text-color,#fff | css-color    | Color of ico expand button                     |
