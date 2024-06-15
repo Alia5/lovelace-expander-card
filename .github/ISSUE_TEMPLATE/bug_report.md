@@ -1,9 +1,13 @@
-<!-- READ THIS FIRST:
-Thanks for raising a expander card issue. Please take the time to review the following
-categories as some of them do not apply here.
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: ''
+---
 
-<!--
-Thanks for raising a Spring Boot issue. Please take the time to review the following
+READ THIS FIRST:
+Thanks for raising a expander card issue. Please take the time to review the following
 categories as some of them do not apply here.
 
 🙅 "Please DO NOT Raise an Issue" Cases
@@ -28,4 +32,3 @@ For quick troubleshooting, prepare a [minimally reproducible example](https://en
 
 TIP: You can always edit your issue if it isn't formatted correctly.
      See https://guides.github.com/features/mastering-markdown 
--->
