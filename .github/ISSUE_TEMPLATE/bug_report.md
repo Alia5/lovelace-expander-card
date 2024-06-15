@@ -32,7 +32,7 @@ Provide details about what browser (and version) you are seeing the issue in. An
 <!--
 Explain what the issue is, and how things should look/behave. If possible provide a screenshot with a description.
 -->
-
+For quick troubleshooting, prepare a [minimally reproducible example](https://en.wikipedia.org/wiki/Minimal_reproducible_example).
 **Javascript errors shown in the web inspector (if applicable):**
 
 ```
