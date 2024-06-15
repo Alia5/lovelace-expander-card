@@ -81,7 +81,6 @@
         (window as any).ExpanderCardEditor = Editor;
         return document.createElement('tag-name-editor');
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     thisComponent.constructor.getStubConfig = () => ({
         ...defaults
     });
@@ -116,7 +115,7 @@
     class={`expander-card ${config.clear ? 'clear' : ''}`}
     style="--expander-card-display:{config['expander-card-display']};
      --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding};
-     --expander-card-background:{config['expander-card-background']}">
+     --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
@@ -134,7 +133,7 @@
     {:else}
         <button
             bind:this={element}
-            class="header ripple"
+            class={`header ${config['expander-card-background-expanded'] ? '' : 'ripple'}`}
             style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
             <div class="primary title">{config.title}</div>
@@ -160,7 +159,7 @@
         display: var(--expander-card-display,block);
         gap: var(--gap);
         padding: var(--padding);
-        background: var(--expander-card-background,#fff) !important;
+        background: var(--card-background,#fff) !important;
     }
     .children-container {
         padding: var(--child-padding);

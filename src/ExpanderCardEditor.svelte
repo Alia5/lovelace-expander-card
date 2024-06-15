@@ -54,6 +54,9 @@ limitations under the License.
         'expander-card-background': ['string', {
             label: 'Expander Card Background (CSS color)'
         }],
+        'expander-card-background-expanded': ['string', {
+            label: 'Expander Card Background when card is open/expaned (CSS color)'
+        }],
         'header-color': ['string', {
             label: 'Color of expand button (CSS color)'
         }],
