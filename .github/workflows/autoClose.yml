@@ -6,7 +6,6 @@ on:
 jobs:
   close-issues:
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'wait-for-user-input'
     permissions:
       issues: write
       pull-requests: write
@@ -21,3 +20,4 @@ jobs:
           days-before-pr-stale: -1
           days-before-pr-close: -1
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          only-labels: "wait-for-user-input,wait-for-mre"
