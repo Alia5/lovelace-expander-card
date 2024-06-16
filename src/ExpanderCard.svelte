@@ -112,9 +112,10 @@
 </script>
 
 <ha-card
-    class={`expander-card ${config.clear ? 'clear' : ''}`}
+    class={`expander-card${config.clear ? ' clear' : ''}${open ? ' open' : ' close'}`}
     style="--expander-card-display:{config['expander-card-display']};
      --gap:{open ? config['expanded-gap'] : config.gap}; --padding:{config.padding};
+     --expander-state:{open};
      --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -125,19 +126,19 @@
                 style="--overlay-margin:{config['overlay-margin']}; --button-background:{config[
                     'button-background'
                 ]}; --header-color:{config['header-color']};"
-                class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
+                class={`header ripple${config['title-card-button-overlay'] ? ' header-overlay' : ''}${open ? ' open' : ' close'}`}
             >
-                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
+                <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico${open ? ' flipped open' : 'close'}`} />
             </button>
         </div>
     {:else}
         <button
             bind:this={element}
-            class={`header ${config['expander-card-background-expanded'] ? '' : 'ripple'}`}
+            class={`header${config['expander-card-background-expanded'] ? '' : ' ripple'}${open ? ' open' : ' close'}`}
             style="--header-width:100%; --button-background:{config['button-background']};--header-color:{config['header-color']};"
         >
-            <div class="primary title">{config.title}</div>
-            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico ${open ? 'flipped' : ''}`} />
+            <div class={`primary title${open ? ' open' : ' close'}`}>{config.title}</div>
+            <ha-icon style="--arrow-color:{config['arrow-color']}" icon="mdi:chevron-down" class={`ico${open ? ' flipped open' : ' close'}`} />
         </button>
     {/if}
     {#if config.cards}
@@ -145,7 +146,7 @@
             style="--expander-card-display:{config['expander-card-display']};
              --gap:{open ? config['expanded-gap'] : config.gap}; --child-padding:{config['child-padding']}"
             class="children-container"
-            use:collapse={{ open }}
+            use:collapse={{ open, duration: 0.2, easing: 'ease' }}
         >
             {#each config.cards as card (card)}
                 <Card {hass} config={card} type={card.type} marginTop={config['child-margin-top']}/>
@@ -159,7 +160,7 @@
         display: var(--expander-card-display,block);
         gap: var(--gap);
         padding: var(--padding);
-        background: var(--card-background,#fff) !important;
+        background: var(--card-background,#fff);
     }
     .children-container {
         padding: var(--child-padding);

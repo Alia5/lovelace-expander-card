@@ -72,6 +72,33 @@ Yaml:
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
 | expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
 
+## Card Mod
+
+With the help of the integration [card mod](https://github.com/thomasloven/lovelace-card-mod), the card can be flexibly adapted. This is also possible based on the card status. A CSS class “open” or “close” is always set.
+
+Using an example to set the background based on the status
+```
+        card_mod:
+          style: |
+            ha-card.open {
+              background: red !important;
+            }
+            ha-card.close {
+              background: #C8A2C8 !important;
+            }
+```
+
+Only the background of the button
+```
+        card_mod:
+          style: |
+            button.open {
+              background: red !important;
+            }
+            button.close {
+              background: #C8A2C8 !important;
+            }
+```
 
 ## Installation
 
