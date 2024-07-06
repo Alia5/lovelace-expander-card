@@ -109,8 +109,13 @@
             });
         }
     });
-    const touch = () => {
-        if (config['title-card-clickable']) {
+
+    let touchElement: HTMLElement | undefined;
+    const touchStart = (event: TouchEvent) => {
+        touchElement = event.target as HTMLElement;
+    };
+    const touchEnd = (event: TouchEvent) => {
+        if (touchElement === event.target && config['title-card-clickable']) {
             open = !open;
         }
     };
@@ -124,7 +129,7 @@
      --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
-            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart={touch}>
+            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart={touchStart} on:touchend={touchEnd}>
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
             <button bind:this={element}
