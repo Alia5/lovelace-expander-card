@@ -99,6 +99,9 @@
                 element.parentElement.addEventListener('click', () => {
                     open = !open;
                 });
+                element.parentElement.addEventListener("touch", () => {
+                    open = !open;
+                });
             }
             return;
         }
