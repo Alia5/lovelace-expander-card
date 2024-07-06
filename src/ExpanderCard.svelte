@@ -109,10 +109,31 @@
             });
         }
     });
-    const touch = () => {
-        if (config['title-card-clickable']) {
+
+    let touchElement: HTMLElement | undefined;
+    let isScrolling = false;
+    let startX = 0;
+    let startY = 0;
+    const touchStart = (event: TouchEvent) => {
+        touchElement = event.target as HTMLElement;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+        isScrolling = false;
+    };
+
+    const touchMove = (event: TouchEvent) => {
+        const currentX = event.touches[0].clientX;
+        const currentY = event.touches[0].clientY;
+        if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) {
+            isScrolling = true;
+        }
+    };
+
+    const touchEnd = (event: TouchEvent) => {
+        if (!isScrolling && touchElement === event.target && config['title-card-clickable']) {
             open = !open;
         }
+        touchElement = undefined;
     };
 </script>
 
@@ -124,7 +145,7 @@
      --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
-            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart={touch}>
+            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart={touchStart} on:touchmove={touchMove} on:touchend={touchEnd}>
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
             <button bind:this={element}
