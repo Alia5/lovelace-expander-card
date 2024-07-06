@@ -99,9 +99,6 @@
                 element.parentElement.addEventListener('click', () => {
                     open = !open;
                 });
-                element.parentElement.addEventListener("touch", () => {
-                    open = !open;
-                });
             }
             return;
         }
@@ -112,6 +109,11 @@
             });
         }
     });
+    const touch = () => {
+        if (config['title-card-clickable']) {
+            open = !open;
+        }
+    };
 </script>
 
 <ha-card
@@ -122,7 +124,7 @@
      --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
-            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
+            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart={touch}>
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
             <button bind:this={element}
