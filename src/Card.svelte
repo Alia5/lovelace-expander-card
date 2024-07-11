@@ -24,7 +24,7 @@ limitations under the License.
     export let hass: HomeAssistant;
 
 
-    let loading = true;
+    export let loading = true;
     const uplift = (
         node: HTMLElement,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
