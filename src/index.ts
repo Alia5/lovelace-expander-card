@@ -12,7 +12,6 @@ limitations under the License.
 */
 export { default } from './ExpanderCard.svelte';
 import { version } from '../package.json';
-// Make Typescript Happy!
 declare global {
     interface Window {
         customCards?: {
