@@ -21,7 +21,9 @@
 
     let isEditorMode = false;
 
-    export let hass: HomeAssistant;
+    // fix for #199
+    // eslint-disable-next-line no-undef-init
+    export let hass: HomeAssistant | undefined = undefined;
 
     const defaults = {
         'gap': '0.0em',

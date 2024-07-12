@@ -21,27 +21,29 @@ limitations under the License.
     export let type = 'div';
     export let marginTop ='0px';
     export let config: LovelaceCardConfig;
-    export let hass: HomeAssistant;
+    // fix for #199
+    // eslint-disable-next-line no-undef-init
+    export let hass: HomeAssistant | undefined = undefined;
 
 
     let loading = true;
     const uplift = (
         node: HTMLElement,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        p: { marginTop: string; type: string; hass: HomeAssistant }
+        p: { marginTop: string; type: string; hassParent: HomeAssistant | undefined}
     ) => ({
         // eslint-disable-next-line no-shadow
-        update: (p: { marginTop: string; type: string; hass: HomeAssistant }) => {
+        update: (p: { marginTop: string; type: string; hassParent: HomeAssistant}) => {
             if (node) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 if ((node.firstChild as any)?.tagName) {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    (node.firstChild as any).hass = p.hass;
+                    (node.firstChild as any).hass = p.hassParent;
                     return;
                 }
                 void (async () => {
                     const el = (await cardUtil).createCardElement(config);
-                    el.hass = p.hass;
+                    el.hass = p.hassParent;
                     node.setAttribute('style', 'margin-top: ' + p.marginTop + ';');
                     node.innerHTML = '';
                     node.appendChild(el);
@@ -52,7 +54,7 @@ limitations under the License.
     });
 </script>
 
-<div use:uplift={{ marginTop, type, hass }} />
+<div use:uplift={{ marginTop: marginTop, type: type, hassParent: hass }} />
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}
