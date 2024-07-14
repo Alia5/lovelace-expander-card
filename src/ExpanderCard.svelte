@@ -89,16 +89,21 @@
 
 
     let element: HTMLElement;
-
+    let touchPreventClick = false;
     onMount(() => {
         if(isListenerAdded) {
             return;
         }
-
         if (config['title-card-clickable']) {
             if (element.parentElement) {
                 isListenerAdded = true;
-                element.parentElement.addEventListener('click', () => {
+                element.parentElement.addEventListener('click', (event) => {
+                    if (touchPreventClick) {
+                        event.preventDefault();
+                        event.stopImmediatePropagation();
+                        touchPreventClick = false;
+                        return false;
+                    }
                     open = !open;
                 });
             }
@@ -106,7 +111,13 @@
         }
         if (element.tagName === 'BUTTON') {
             isListenerAdded = true;
-            element.addEventListener('click', () => {
+            element.addEventListener('click', (event) => {
+                if (touchPreventClick) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    touchPreventClick = false;
+                    return false;
+                }
                 open = !open;
             });
         }
@@ -136,6 +147,8 @@
             open = !open;
         }
         touchElement = undefined;
+        touchPreventClick = true;
+        setTimeout(() => touchPreventClick = false, 300);
     };
 </script>
 
@@ -146,8 +159,8 @@
      --expander-state:{open};
      --card-background:{open && config['expander-card-background-expanded'] ? config['expander-card-background-expanded']: config['expander-card-background']}">
     {#if config['title-card']}
-        <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
-            <div class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart|passive={touchStart} on:touchmove|passive={touchMove} on:touchend={touchEnd}>
+        <div id='id1' class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
+            <div id='id2' class="title-card-container" style="--title-padding:{config['title-card-padding']}" on:touchstart|passive={touchStart} on:touchmove|passive={touchMove} on:touchend={touchEnd}>
                 <Card {hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
             <button bind:this={element}
