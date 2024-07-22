@@ -51,8 +51,10 @@
         } else {
             let configExpanded = config.expanded;
             if (config['expand-id'] !== undefined) {
-              const storageValue = localStorage.getItem(`expander-${config['expand-id']}`);
-              configExpanded = storageValue ? storageValue === 'true' : configExpanded;
+              try {
+                const storageValue = localStorage.getItem(`expander-${config['expand-id']}`);
+                configExpanded = storageValue ? storageValue === 'true' : configExpanded;
+              } catch { }
             }
             if (configExpanded !== undefined) {
                 setTimeout(() => (expanded = configExpanded as boolean), 100);
@@ -91,7 +93,10 @@
                 on:click={() => {
                     expanded = !expanded;
                     if (config['expand-id'] !== undefined) {
-                      localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                      try {
+                        localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                      }
+                      catch { }
                     }
                 }}
             >
@@ -104,7 +109,10 @@
             on:click={() => {
                 expanded = !expanded;
                 if (config['expand-id'] !== undefined) {
-                  localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                  try {
+                    localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                  }
+                  catch { }
                 }
             }}
             style="--button-background:{config['button-background']};"
