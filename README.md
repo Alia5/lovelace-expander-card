@@ -40,21 +40,22 @@ Clear Background (default theme):
 
 Yaml:
 
-| Name                      | Type     | Default       | Supported options      | Description                                           |
-| ------------------------- | -------- | ------------- | ---------------------- | ----------------------------------------------------- |
-| type                      | string   | **Required**  | `custom:expander-card` | Type of the card.                                     |
-| title                     | string   | _Expander_    | *                      | Title (Not displayed if using Title-Card)             |
-| clear                     | boolean  | _false_       | true\|false            | Remove Background                                     |
-| expanded                  | boolean  | _false_       | true\|false            | Start expanded                                        |
-| button-background         | string   | _transparent_ | css-color              | Background color of expand button                     |
-| gap                       | string   | _0.6em_       | css-size               | gap between child cards                               |
-| padding                   | string   | _1em_         | css-size               | padding of all card content                           |
-| child-padding             | string   | _0.5em_       | css-size               | padding of child cards                                |
-| title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                               |
-| title-card-padding        | string   | _0px_         | css-size               | padding of title-card                                 |
-| title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                 |
-| overlay-margin            | string   | _2em_         | css-size               | Margin from top right of expander button (if overlay) |
-| cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
+| Name                      | Type     | Default       | Supported options      | Description                                                    |
+| ------------------------- | -------- | ------------- | ---------------------- | -------------------------------------------------------------- |
+| type                      | string   | **Required**  | `custom:expander-card` | Type of the card.                                              |
+| title                     | string   | _Expander_    | *                      | Title (Not displayed if using Title-Card)                      |
+| clear                     | boolean  | _false_       | true\|false            | Remove Background                                              |
+| expanded                  | boolean  | _false_       | true\|false            | Start expanded                                                 |
+| expand-id                 | string   | **optional**  | string                 | Unique ID to use for JS LocalStorage. Will save expanded state |
+| button-background         | string   | _transparent_ | css-color              | Background color of expand button                              |
+| gap                       | string   | _0.6em_       | css-size               | gap between child cards                                        |
+| padding                   | string   | _1em_         | css-size               | padding of all card content                                    |
+| child-padding             | string   | _0.5em_       | css-size               | padding of child cards                                         |
+| title-card                | object   | **optional**  | LovelaceCardConfig     | Replace Title with card                                        |
+| title-card-padding        | string   | _0px_         | css-size               | padding of title-card                                          |
+| title-card-button-overlay | boolean  | _false_       | true\|false            | Overlay expand button over title-card                          |
+| overlay-margin            | string   | _2em_         | css-size               | Margin from top right of expander button (if overlay)          |
+| cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                              |
 
 ## Installation
 

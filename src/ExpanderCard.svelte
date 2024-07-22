@@ -49,8 +49,13 @@
         if (isEditorMode) {
             expanded = true;
         } else {
-            if (config.expanded !== undefined) {
-                setTimeout(() => (expanded = config.expanded as boolean), 100);
+            let configExpanded = config.expanded;
+            if (config['expand-id'] !== undefined) {
+              const storageValue = localStorage.getItem(`expander-${config['expand-id']}`);
+              configExpanded = storageValue ? storageValue === 'true' : configExpanded;
+            }
+            if (configExpanded !== undefined) {
+                setTimeout(() => (expanded = configExpanded as boolean), 100);
             }
         }
     });
@@ -85,6 +90,9 @@
                 class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
                 on:click={() => {
                     expanded = !expanded;
+                    if (config['expand-id'] !== undefined) {
+                      localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                    }
                 }}
             >
                 <ha-icon icon="mdi:chevron-down" class={`primaryico ${expanded ? 'flipped' : ''}`} />
@@ -95,6 +103,9 @@
             class="header ripple"
             on:click={() => {
                 expanded = !expanded;
+                if (config['expand-id'] !== undefined) {
+                  localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                }
             }}
             style="--button-background:{config['button-background']};"
         >
