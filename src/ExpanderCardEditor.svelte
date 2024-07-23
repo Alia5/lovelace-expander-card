@@ -45,8 +45,11 @@ limitations under the License.
         'expanded': ['boolean', {
             label: 'Start expanded (Always expanded in editor)'
         }],
+        'expand-id': ['string', {
+            label: 'LocalStorage ID'
+        }],
         'button-background': ['string', {
-            label: 'Button background (CSS color'
+            label: 'Button background (CSS color)'
         }],
         'gap': ['string', {
             label: 'Gap between cards'

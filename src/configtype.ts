@@ -24,5 +24,6 @@ export interface ExpanderConfig {
     'overlay-margin'?: string;
     'child-padding'?: string;
     expanded?: boolean;
+    'expand-id'?: string;
     'button-background': string;
 }
