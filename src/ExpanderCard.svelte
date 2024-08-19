@@ -2,24 +2,16 @@
 <svelte:options tag="tag-name" />
 
 <script lang="ts">
-    /* eslint-disable prettier/prettier */
-    import { default as Editor } from './ExpanderCardEditor.svelte';
-
     import type { HomeAssistant } from 'custom-card-helpers';
     import Card from './Card.svelte';
     import collapse from 'svelte-collapse';
 
-    // hack get reference to own component
-    import { get_current_component } from 'svelte/internal';
     import type { ExpanderConfig } from './configtype';
     import { onMount } from 'svelte';
-    const thisComponent = get_current_component();
 
     let open = false;
 
     let isListenerAdded = false;
-
-    let isEditorMode = false;
 
     // fix for #199
     // eslint-disable-next-line no-undef-init
@@ -55,36 +47,21 @@
     };
 
     onMount(() => {
-        isEditorMode = (thisComponent as HTMLElement).parentElement?.localName === 'hui-card-preview';
-        if (isEditorMode) {
-            open = true;
-        } else {
-            const minWidthExpanded = config['min-width-expanded'] as number;
-            const maxWidthExpanded = config['max-width-expanded'] as number;
-            const offsetWidth = document.body.offsetWidth;
+        const minWidthExpanded = config['min-width-expanded'] as number;
+        const maxWidthExpanded = config['max-width-expanded'] as number;
+        const offsetWidth = document.body.offsetWidth;
 
-            if (minWidthExpanded && maxWidthExpanded) {
-                config.expanded = offsetWidth >= minWidthExpanded && offsetWidth <= maxWidthExpanded;
-            } else if (minWidthExpanded) {
-                config.expanded = offsetWidth >= minWidthExpanded;
-            } else if (maxWidthExpanded) {
-                config.expanded = offsetWidth <= maxWidthExpanded;
-            }
-
-            if (config.expanded !== undefined) {
-                setTimeout(() => (open = config.expanded as boolean), 100);
-            }
+        if (minWidthExpanded && maxWidthExpanded) {
+            config.expanded = offsetWidth >= minWidthExpanded && offsetWidth <= maxWidthExpanded;
+        } else if (minWidthExpanded) {
+            config.expanded = offsetWidth >= minWidthExpanded;
+        } else if (maxWidthExpanded) {
+            config.expanded = offsetWidth <= maxWidthExpanded;
         }
-    });
 
-    // Hack add static method to compiled Card class
-    thisComponent.constructor.getConfigElement = () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (window as any).ExpanderCardEditor = Editor;
-        return document.createElement('tag-name-editor');
-    };
-    thisComponent.constructor.getStubConfig = () => ({
-        ...defaults
+        if (config.expanded !== undefined) {
+            setTimeout(() => (open = config.expanded as boolean), 100);
+        }
     });
 
 

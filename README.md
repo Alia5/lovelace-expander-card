@@ -39,12 +39,10 @@ Clear Background (default theme):
 
 ## Options
 
-**Graphical config supported**
-
-![Sample editor](examples/editor.png)
+Graphical config Editor is currently not  supported. Contribution welcome!
 
 
-Yaml:
+Yaml Options:
 
 | Name                      | Type     | Default       | Supported options      | Description                                           |
 | ------------------------- | -------- | ------------- | ---------------------- | ----------------------------------------------------- |
