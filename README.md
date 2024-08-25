@@ -114,7 +114,8 @@ Example title card that is clickable and has 2 nested cards, which is directly e
           name: null
           show_wind: speed
 ```
-## Title
+### Title
+
 Example with title that is clickable and has 2 nested cards.
 
 ```
@@ -145,8 +146,10 @@ Example with title that is clickable and has 2 nested cards.
             show_wind: speed
 ```
 
-## Title with min-width-expanded
+### Title with min-width-expanded
+
 Example with title that is clickable and has 2 nested cards with are automatically expanded when the screen is more than 300px.
+
 ```
       - type: custom:expander-card
         child-margin-top: 0.6em
