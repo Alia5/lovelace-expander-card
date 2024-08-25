@@ -70,6 +70,112 @@ Yaml Options:
 | cards                     | object[] | **optional**  | LovelaceCardConfig[]   | Child cards to show when expanded                     |
 | expander-card-display     | string   | block         | css-display            | Layout/Display of the card                            |
 
+## Examples
+
+Here are a few examples of usage.
+
+### Title card
+
+Example title card that is clickable and has 2 nested cards, which is directly expanded
+```
+    - type: custom:expander-card
+      child-margin-top: 0.6em
+      padding: 0
+      clear: true
+      title-card-button-overlay: true
+      title-card-clickable: true
+      expanded: true
+      title-card:
+        type: "custom:digital-clock"
+        dateFormat:
+          weekday: "long"
+          day: "2-digit"
+          month: "short"
+        timeFormat:
+          hour: "2-digit"
+          minute: "2-digit"
+      cards:
+        - type: custom:simple-weather-card
+          entity: weather.openweathermap
+          primary_info:
+            - wind_speed
+            - wind_bearing
+          secondary_info:
+            - precipitation
+            - precipitation_probability
+        - type: custom:hourly-weather
+          entity: weather.openweathermap
+          icons: true
+          show_precipitation_probability: true
+          show_precipitation_amounts: true
+          forecast_type: "hourly"
+          num_segments: 10"
+          label_spacing: "1"
+          name: null
+          show_wind: speed
+```
+## Title
+Example with title that is clickable and has 2 nested cards.
+
+```
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        title: "Test"
+        title-card-button-overlay: true
+        title-card-clickable: true
+        cards:
+          - type: custom:simple-weather-card
+            entity: weather.openweathermap
+            primary_info:
+              - wind_speed
+              - wind_bearing
+            secondary_info:
+              - precipitation
+              - precipitation_probability
+          - type: custom:hourly-weather
+            entity: weather.openweathermap
+            icons: true
+            show_precipitation_probability: true
+            show_precipitation_amounts: true
+            forecast_type: "hourly"
+            num_segments: 10"
+            label_spacing: "1"
+            name: null
+            show_wind: speed
+```
+
+## Title with min-width-expanded
+Example with title that is clickable and has 2 nested cards with are automatically expanded when the screen is more than 300px.
+```
+      - type: custom:expander-card
+        child-margin-top: 0.6em
+        padding: 0
+        title: "Test"
+        title-card-button-overlay: true
+        title-card-clickable: true
+        min-width-expanded: 300
+        cards:
+          - type: custom:simple-weather-card
+            entity: weather.openweathermap
+            primary_info:
+              - wind_speed
+              - wind_bearing
+            secondary_info:
+              - precipitation
+              - precipitation_probability
+            name: in Gärtringen
+          - type: custom:hourly-weather
+            entity: weather.openweathermap
+            icons: true
+            show_precipitation_probability: true
+            show_precipitation_amounts: true
+            forecast_type: "hourly"
+            num_segments: 10"
+            label_spacing: "1"
+            show_wind: speed
+```
+
 ## Card Mod
 
 With the help of the integration [card mod](https://github.com/thomasloven/lovelace-card-mod), the card can be flexibly adapted. This is also possible based on the card status. A CSS class “open” or “close” is always set.
