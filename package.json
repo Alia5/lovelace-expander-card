@@ -36,7 +36,7 @@
     "npm-watch": "^0.13.0",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.6",
-    "rollup": "^4.21.0",
+    "rollup": "^4.21.1",
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.2.2",
