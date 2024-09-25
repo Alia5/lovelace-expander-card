@@ -32,7 +32,7 @@
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-svelte": "^2.43.0",
+    "eslint-plugin-svelte": "^2.44.0",
     "npm-watch": "^0.13.0",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.6",
