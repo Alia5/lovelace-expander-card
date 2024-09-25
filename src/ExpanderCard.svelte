@@ -1,12 +1,42 @@
 <!-- eslint-disable-next-line svelte/valid-compile -->
-<svelte:options tag="tag-name" />
+<svelte:options
+customElement={{
+    tag: 'tag-name',
+    extend: (customElementConstructor) => class extends customElementConstructor {
+        // eslint-disable-next-line no-shadow,@typescript-eslint/explicit-member-accessibility
+        setConfig(config) {
+            const defaults = {
+                'gap': '0.0em',
+                'expanded-gap': '0.6em',
+                'padding': '1em',
+                'clear': false,
+                'title': ' ',
+                'overlay-margin': '0.0em',
+                'child-padding': '0.0em',
+                'child-margin-top': '0.0em',
+                'button-background': 'transparent',
+                'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
+                'header-color': 'var(--primary-text-color,#fff)',
+                'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
+                'expander-card-display': 'block',
+                'title-card-clickable': false,
+                'min-width-expanded': 0,
+                'max-width-expanded': 0
+            };
+            this.config = { defaults, ...config };
+            // Add the function here, not below in the component so that
+            // it's always available, not just when the inner Svelte component
+            // is mounted
+            // see ticket https://github.com/sveltejs/svelte/issues/8954
+        }
+    }
+}}
+/>
 
 <script lang="ts">
     import type { HomeAssistant } from 'custom-card-helpers';
     import Card from './Card.svelte';
     import collapse from 'svelte-collapse';
-
-    import type { ExpanderConfig } from './configtype';
     import { onMount } from 'svelte';
 
     let open = false;
@@ -16,39 +46,11 @@
     // fix for #199
     // eslint-disable-next-line no-undef-init
     export let hass: HomeAssistant | undefined = undefined;
-
-    const defaults = {
-        'gap': '0.0em',
-        'expanded-gap': '0.6em',
-        'padding': '1em',
-        'clear': false,
-        'title': ' ',
-        'overlay-margin': '0.0em',
-        'child-padding': '0.0em',
-        'child-margin-top': '0.0em',
-        'button-background': 'transparent',
-        'expander-card-background': 'var(--ha-card-background,var(--card-background-color,#fff))',
-        'header-color': 'var(--primary-text-color,#fff)',
-        'arrow-color': 'var(--arrow-color,var(--primary-text-color,#fff))',
-        'expander-card-display': 'block',
-        'title-card-clickable': false,
-        'min-width-expanded': 0,
-        'max-width-expanded': 0
-    };
-
-    let config: ExpanderConfig = defaults;
-
-    // Home Assistant will call this with the config object!
-    // leave export let otherwise hass wil thro errors....
-    // eslint-disable-next-line svelte/no-unused-svelte-ignore
-    // svelte-ignore unused-export-let
-    export let setConfig = (conf = {}) => {
-        config = { ...defaults, ...conf };
-    };
+    export let config;
 
     onMount(() => {
-        const minWidthExpanded = config['min-width-expanded'] as number;
-        const maxWidthExpanded = config['max-width-expanded'] as number;
+        const minWidthExpanded = config['min-width-expanded'];
+        const maxWidthExpanded = config['max-width-expanded'];
         const offsetWidth = document.body.offsetWidth;
 
         if (minWidthExpanded && maxWidthExpanded) {
