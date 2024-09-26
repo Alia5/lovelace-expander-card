@@ -23,7 +23,7 @@ customElement={{
                 'min-width-expanded': 0,
                 'max-width-expanded': 0
             };
-            this.config = { defaults, ...config };
+            this.config = { ...defaults, ...config };
             // Add the function here, not below in the component so that
             // it's always available, not just when the inner Svelte component
             // is mounted

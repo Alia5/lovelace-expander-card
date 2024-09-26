@@ -5,7 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
-import json from "@rollup/plugin-json";
+import json from '@rollup/plugin-json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,8 +39,7 @@ export default (commandlineargs) => {
                 compilerOptions: {
                     customElement: true,
                     hydratable: true,
-                    dev: true,
-
+                    dev: true
                 },
                 emitCss: true
             }),
