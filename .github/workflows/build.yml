@@ -1,6 +1,6 @@
 name: Build
 
-on: workflow_dispatch
+on: [workflow_dispatch, push]
 
 defaults:
   run:
@@ -10,12 +10,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-      - run: npm i   
-      - run: npm run build
+        - name: Checkout
+          uses: actions/checkout@v4
+        - uses: pnpm/action-setup@v4
+          name: Install pnpm
+          with:
+            version: 9
+            run_install: false
+        - name: Install Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: 'pnpm'
+        - name: Install dependencies
+          run: pnpm install
+        - name: Build
+          run: pnpm run build
+        - name: Archive production artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: expander-card
+            path: |
+                dist
+

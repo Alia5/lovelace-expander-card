@@ -12,7 +12,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 -->
-<svelte:options tag="expander-sub-card" />
+<svelte:options customElement="lovelace-expander-sub-card" />
 
 <script lang="ts">
     import type { HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
@@ -49,7 +49,7 @@ limitations under the License.
     });
 </script>
 
-<div use:uplift={{ type, hass }} />
+<div use:uplift={{ type, hass }} ></div>
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}
