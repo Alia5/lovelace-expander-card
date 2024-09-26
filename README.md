@@ -70,13 +70,13 @@ https://github.com/Alia5/lovelace-expander-card
 ### Manual
 #### 1. Download the card
 
-Install the `expander-card` card by copying `expander-card.js` to `<config directory>/www/expander-card.js`
+Install the `expander-card` card by copying `lovelace-expander-card.js` to `<config directory>/www/lovelace-expander-card.js`
 
 Bash:
 
 ```bash
-wget https://github.com/Alia5/lovelace-expander-card/releases/download/latest/expander-card.js
-mv expander-card.js /config/www/
+wget https://github.com/Alia5/lovelace-expander-card/releases/download/latest/lovelace-expander-card.js
+mv lovelace-expander-card.js /config/www/
 ```
 
 #### 2. Link the card to your lovelace ui
@@ -87,7 +87,7 @@ Link `expander-card` inside your `ui-lovelace.yaml`
 
 ```yaml
 resources:
-  - url: /local/expander-card.js
+  - url: /local/lovelace-expander-card.js
     type: js
 ```
 
