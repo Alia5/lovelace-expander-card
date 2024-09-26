@@ -46,7 +46,7 @@ jobs:
           target_commitish: "master"
           draft: false
           prerelease: false
-          files: dist/expander-card.js
+          files: dist/lovelace-expander-card.js
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
