@@ -13,38 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Git
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-      - name: Cache node modules
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
-            ${{ runner.os }}-
-      - name: Setup NodeJs
-        uses: actions/setup-node@v3
+          version: 9
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '17'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+            node-version: 20
+            cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Set app version (Unix)
-        run: npm version ${{ github.event.inputs.release_version }} --no-git-tag-version
-
-      - name: Build Project
-        run: npm run build
+      - name: Build
+        run: pnpm run build
 
       - name: "Create Github release (full)"
         if: ${{ !contains( github.event.inputs.release_version, '-rc' ) }}
@@ -56,7 +46,7 @@ jobs:
           target_commitish: "master"
           draft: false
           prerelease: false
-          files: public/expander-card.js
+          files: dist/lovelace-expander-card.js
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}

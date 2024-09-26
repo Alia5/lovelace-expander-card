@@ -12,19 +12,41 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 -->
-<svelte:options tag="tag-name-editor" />
+<!-- eslint-disable-next-line svelte/valid-compile -->
+<svelte:options customElement={{
+    tag: 'lovelace-expander-card-editor',
+    extend: (customElementConstructor) => class extends customElementConstructor {
+        public config!: ExpanderConfig;
+        public self!: HTMLElement;
+
+        public constructor() {
+            super();
+            // hack to get reference to self in component
+            this.self = this;
+        }
+        public setConfig(conf = {}) {
+            this.config = { ...(this.config || {}), ...conf };
+        };
+    }
+
+}} />
 
 <script lang="ts">
-    /* eslint-disable prettier/prettier */
     import { fireEvent, type HomeAssistant } from 'custom-card-helpers';
-
-    // hack get reference to own component
-    import { get_current_component } from 'svelte/internal';
     import type { ExpanderConfig } from './configtype';
-    const thisComponent = get_current_component();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let config: Partial<ExpanderConfig> & Record<string, any> = {};
+    const {
+        hass,
+        lovelace,
+        self,
+        config = {}
+    }: {
+        hass: HomeAssistant;
+        lovelace: unknown;
+        self: HTMLElement;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        config: Partial<ExpanderConfig> & Record<string, any>;
+    } = $props();
 
     const configuratorElements: {
         [K in keyof Required<ExpanderConfig>]: [
@@ -80,25 +102,13 @@ limitations under the License.
         'cards': ['card[]']
     };
 
-    export let hass: HomeAssistant;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    export let lovelace: any;
-
     const valueChanged = (): void => {
-        fireEvent(thisComponent, 'config-changed', { config: config }, {
+        fireEvent(self, 'config-changed', { config: config }, {
             bubbles: true,
             cancelable: false,
             composed: true // makes the event jump shadow DOM boundary
         });
 
-    };
-
-    // Home Assistant will call this with the config object!
-    // leave export let otherwise hass wil thro errors....
-    // eslint-disable-next-line svelte/no-unused-svelte-ignore
-    // svelte-ignore unused-export-let
-    export let setConfig = (conf = {}) => {
-        config = { ...config, ...conf };
     };
 
     // // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,7 +124,7 @@ limitations under the License.
     //     }
     // };
 
-    let selectedTab = 0;
+    let selectedTab = $state(0);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onTabClicked = (ev: any) => selectedTab = ev.detail.selected;
 
@@ -124,19 +134,19 @@ limitations under the License.
     const updateCard = (key: string) => (ev: any) => {
         ev.stopPropagation();
         config[key] = ev.detail.config;
-        clearTimeout(timeout as unknown as number);
-        timeout = setTimeout(() => {
-            fireEvent(thisComponent, 'config-changed',  {
-                config: config[key]
-            }, {
-                bubbles: true,
-                cancelable: true,
-                composed: true // makes the event jump shadow DOM boundary
-            });
-            setTimeout(() => {
-                valueChanged();
-            }, 100) as unknown as number;
-        }, 5000) as unknown as number;
+        // clearTimeout(timeout as unknown as number);
+        // timeout = setTimeout(() => {
+        //     fireEvent(self, 'config-changed',  {
+        //         config: config[key]
+        //     }, {
+        //         bubbles: true,
+        //         cancelable: true,
+        //         composed: true // makes the event jump shadow DOM boundary
+        //     });
+        //     setTimeout(() => {
+        //         valueChanged();
+        //     }, 100) as unknown as number;
+        // }, 5000) as unknown as number;
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -144,21 +154,32 @@ limitations under the License.
         func(ev);
     };
 
-    let showTitleCardPicker = false;
+    let showTitleCardPicker = $state(false);
 
 
-    let selectedChildChard = 0;
-    let showAddCardPicker = false;
-        /* eslint-enable prettier/prettier */
+    let selectedChildChard = $state(0);
+    let showAddCardPicker = $state(false);
+
+    let cardPicker: HTMLElement|undefined = $state(undefined);
+
+    $effect(() => {
+        // hack assign lovelace for this shit to work by hand
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (cardPicker && (!cardPicker as any).lovelace) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (cardPicker as any).lovelace = lovelace;
+        }
+    });
+
 </script>
 
-<paper-tabs scrollable selected={selectedTab} on:iron-activate={onTabClicked}>
+<paper-tabs scrollable selected={selectedTab} oniron-activate={onTabClicked}>
     <paper-tab class={`${selectedTab === 0 ? 'tab-selected' : ''}`}> Layout </paper-tab>
     <paper-tab class={`${selectedTab !== 0 ? 'tab-selected' : ''}`}> Cards </paper-tab>
 </paper-tabs>
 
 {#if selectedTab === 0}
-    <form class="content" on:input={valueChanged}>
+    <form class="content" oninput={valueChanged}>
         <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
         {#each Object.entries(configuratorElements) as [key, [type, extra]] (key)}
             {#if type === 'boolean' && (!extra?.cond || extra?.cond(config))}
@@ -166,10 +187,10 @@ limitations under the License.
                     <ha-switch
                         checked={config[key] ?? false}
                         configValue={config[key]}
-                        on:input={() => {
+                        oninput={() => {
                             config[key] = !config[key];
                         }}
-                    />
+                    ></ha-switch>
                 </ha-formfield>
             {/if}
             {#if type === 'string' && (!extra?.cond || extra?.cond(config))}
@@ -177,10 +198,10 @@ limitations under the License.
                     label={extra?.label || key}
                     value={config[key] ?? ''}
                     configValue={config[key]}
-                    on:input={passEv((ev) => {
+                    oninput={passEv((ev) => {
                         config[key] = ev?.target?.value;
                     })}
-                />
+                ></ha-textfield>
             {/if}
             {#if type === 'card' && (!extra?.cond || extra?.cond(config))}
                 <div class="row">
@@ -189,121 +210,126 @@ limitations under the License.
                         value={config[key]?.type ?? ''}
                         configValue={config[key]}
                         readonly={true}
-                    />
-                    <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <ha-icon-button on:click={() => (showTitleCardPicker = true)}>
+                    ></ha-textfield>
+
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <ha-icon-button onclick={() => (showTitleCardPicker = true)} role="button" tabindex="0">
                         {#if !config[key]}
-                            <ha-icon icon="mdi:plus" />
+                            <ha-icon icon="mdi:plus" ></ha-icon>
                         {:else}
-                            <ha-icon icon="mdi:redo" />
+                            <ha-icon icon="mdi:redo" ></ha-icon>
                         {/if}
                     </ha-icon-button>
                     {#if config[key]}
-                        <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <ha-icon-button
-                            on:click={() => {
+
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <ha-icon-button role="button" tabindex="0"
+                            onclick={() => {
                                 config[key] = undefined;
                                 valueChanged();
                             }}
                         >
-                            <ha-icon icon="mdi:close" />
+                            <ha-icon icon="mdi:close" ></ha-icon>
                         </ha-icon-button>
                     {/if}
                 </div>
                 {#if showTitleCardPicker}
                     <div class="sub-panel">
-                        <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <mwc-button
-                            on:click={() => {
+
+                        <!-- svelte-ignore a11y_click_events_have_key_events -->
+                        <mwc-button role="button" tabindex="0"
+                            onclick={() => {
                                 showTitleCardPicker = false;
                             }}>Cancel</mwc-button
                         >
                         <hui-card-picker
-                            {hass}
-                            {lovelace}
-                            on:config-changed={passEv((ev) => {
+                            hass={hass}
+                            lovelace={lovelace}
+                            bind:this={cardPicker}
+                            onconfig-changed={passEv((ev) => {
+                                console.log('cardpicker-config-changed');
                                 updateCard(key)(ev);
                                 showTitleCardPicker = false;
                             })}
-                        />
+                        ></hui-card-picker>
                     </div>
                 {:else if config[key]}
                     <div class="sub-panel">
                         <hui-card-element-editor
-                            {hass}
+                            hass={hass}
+                            lovelace={lovelace}
                             value={config[key]}
-                            {lovelace}
-                            on:config-changed={updateCard(key)}
-                        />
+                            onconfig-changed={updateCard(key)}
+                        ></hui-card-element-editor>
                     </div>
                 {/if}
             {/if}
         {/each}
     </form>
 {:else}
-    <form class="content" on:input={valueChanged}>
+    <form class="content" oninput={valueChanged}>
         <div class="row">
             {#if !showAddCardPicker}
                 <paper-tabs
                     scrollable
                     selected={selectedChildChard}
-                    on:iron-activate={passEv((ev) => {
+                    oniron-activate={passEv((ev) => {
                         selectedChildChard = ev.detail.selected;
                     })}
                 >
+                     <!--  eslint-disable-next-line @typescript-eslint/no-unused-vars -->
                     {#each config.cards || [] as card, i}
-                        <paper-tab>{i + 1} {void card || ''}</paper-tab>
+                        <paper-tab>{i + 1} {''}</paper-tab>
                     {/each}
                 </paper-tabs>
-                <paper-tabs id="add-card" on:iron-activate={() => (showAddCardPicker = true)}>
+                <paper-tabs id="add-card" oniron-activate={() => (showAddCardPicker = true)}>
                     <paper-tab>
-                        <ha-icon icon="mdi:plus" />
+                        <ha-icon icon="mdi:plus" ></ha-icon>
                     </paper-tab>
                 </paper-tabs>
             {/if}
         </div>
         {#if config?.cards?.length && !showAddCardPicker}
             <div class="sub-panel">
-                <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <mwc-button
-                    on:click={() => {
+                role="button" tabindex="0"
+                    onclick={() => {
                         config.cards = config.cards?.filter((_, i) => i !== selectedChildChard);
                         selectedChildChard = 0;
                         valueChanged();
                     }}>Remove</mwc-button
                 >
                 <hui-card-element-editor
-                    {hass}
+                    hass={hass}
+                    lovelace={lovelace}
                     value={config.cards[selectedChildChard]}
-                    {lovelace}
-                    on:config-changed={passEv((ev) => {
+                    onconfig-changed={passEv((ev) => {
                         ev.stopPropagation();
                         if (config.cards) {
                             config.cards[selectedChildChard] = ev.detail.config;
                             valueChanged();
                         }
                     })}
-                />
+                ></hui-card-element-editor>
             </div>
         {/if}
         {#if showAddCardPicker}
             <div class="sub-panel">
-                <!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -->
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <mwc-button
-                    on:click={() => {
+                role="button" tabindex="0"
+                    onclick={() => {
                         showAddCardPicker = false;
                         valueChanged();
                     }}>Cancel</mwc-button
                 >
                 <hui-card-picker
-                    {hass}
-                    {lovelace}
-                    on:config-changed={passEv((ev) => {
+                    hass={hass}
+                    lovelace={lovelace}
+                    bind:this={cardPicker}
+                    onconfig-changed={passEv((ev) => {
+                        console.log('cardpicker-config-changed');
                         ev.stopPropagation();
                         if (!config.cards) {
                             config.cards = [];
@@ -313,7 +339,7 @@ limitations under the License.
                         showAddCardPicker = false;
                         selectedChildChard = config.cards.length - 1;
                     })}
-                />
+                ></hui-card-picker>
             </div>
         {/if}
     </form>

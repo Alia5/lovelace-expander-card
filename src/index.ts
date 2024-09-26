@@ -11,7 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 export { default as default } from './ExpanderCard.svelte';
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { cardUtil } from './cardUtil';
 // Make Typescript Happy!
@@ -29,14 +28,14 @@ declare global {
 const version = 'versionStr';
 console.info(`ExpanderCard Version: ${version}`);
 
-const devMode = ('devModeValue' as string) === 'true';
+const devMode = import.meta.env.MODE === 'dev';
 
 window.customCards = window.customCards || [];
 window.customCards.push(...[
     {
-        type: 'tag-name',
+        type: `lovelace-expander-card${devMode ? '-dev' : ''}`,
         name: `Expander Card${devMode ? '-dev' : ''}`,
         preview: true,
-        description: 'Expander card'
+        description: `Expander Card${devMode ? ' Dev' : ''}`
     }
 ]);

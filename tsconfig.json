@@ -1,5 +1,4 @@
 {
-    "extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
@@ -9,7 +8,9 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true
+		"strict": true,
+        "module": "esnext",
+        "moduleResolution": "bundler"
 	},
     "include": ["src/**/*"],
 }

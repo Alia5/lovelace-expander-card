@@ -1,30 +1,9 @@
-<!-- eslint-disable-next-line svelte/valid-compile -->
-<svelte:options tag="tag-name" />
 
-<script lang="ts">
-    /* eslint-disable prettier/prettier */
-    import { default as Editor } from './ExpanderCardEditor.svelte';
-
-    import { fade } from 'svelte/transition';
-    import { cubicIn, cubicOut } from 'svelte/easing';
-    import type { HomeAssistant } from 'custom-card-helpers';
-    import Card from './Card.svelte';
-    import { flip } from 'svelte/animate';
-    import { quintOut } from 'svelte/easing';
-
-    // hack get reference to own component
-    import { get_current_component } from 'svelte/internal';
-    import type { ExpanderConfig } from './configtype';
-    import { onMount } from 'svelte';
-    const thisComponent = get_current_component();
-
-    let expanded = false;
-
-    let isEditorMode = false;
-
-    export let hass: HomeAssistant;
-
-    const defaults = {
+<script lang="ts" module>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    import Editor from './ExpanderCardEditor.svelte';
+    const devMode = import.meta.env.MODE === 'dev';
+    export const defaults = {
         'gap': '0.6em',
         'padding': '1em',
         'clear': false,
@@ -33,47 +12,79 @@
         'child-padding': '0.5em',
         'button-background': 'transparent'
     };
+</script>
 
-    let config: ExpanderConfig = defaults;
+<!-- eslint-disable-next-line svelte/valid-compile -->
+<svelte:options customElement={{
+    tag: 'lovelace-expander-card',
+    extend: (customElementConstructor) => class extends customElementConstructor {
+        // re-declare props used in customClass.
+        public config!: ExpanderConfig;
+        public self!: HTMLElement;
 
-    // Home Assistant will call this with the config object!
-    // leave export let otherwise hass wil thro errors....
-    // eslint-disable-next-line svelte/no-unused-svelte-ignore
-    // svelte-ignore unused-export-let
-    export let setConfig = (conf = {}) => {
-        config = { ...defaults, ...conf };
-    };
+        public constructor() {
+            super();
+            // hack to get reference to self in component
+            this.self = this;
+        }
+
+        public static getConfigElement() {
+            return document.createElement(`lovelace-expander-card-editor${devMode ? '-dev' : ''}`);
+        };
+
+        public static getStubConfig(){
+            return { ...defaults };
+        };
+
+        public setConfig(conf = {}) {
+            this.config = { ...defaults, ...conf };
+        };
+    }
+}} />
+
+<script lang="ts">
+
+    // import { default as Editor } from './ExpanderCardEditor.svelte';
+
+    import { fade } from 'svelte/transition';
+    import { cubicIn, cubicOut } from 'svelte/easing';
+    import type { HomeAssistant } from 'custom-card-helpers';
+    import Card from './Card.svelte';
+    import { flip } from 'svelte/animate';
+    import { quintOut } from 'svelte/easing';
+
+    import type { ExpanderConfig } from './configtype';
+    import { onMount } from 'svelte';
+
+    let expanded = $state(false);
+
+    let isEditorMode = $state(false);
+    // add fields used in customClass as props.
+    const {
+        hass,
+        self,
+        config = defaults
+    }: {hass: HomeAssistant; config: ExpanderConfig; self: HTMLElement} = $props();
 
     onMount(() => {
-        isEditorMode = (thisComponent as HTMLElement).parentElement?.localName === 'hui-card-preview';
+        isEditorMode = (self)?.parentElement?.hasAttribute('preview') || false;
         if (isEditorMode) {
             expanded = true;
         } else {
             let configExpanded = config.expanded;
             if (config['expand-id'] !== undefined) {
-              try {
-                const storageValue = localStorage.getItem(`expander-${config['expand-id']}`);
-                configExpanded = storageValue ? storageValue === 'true' : configExpanded;
-              } catch { }
+                try {
+                    const storageValue = localStorage.getItem(`expander-${config['expand-id']}`);
+                    configExpanded = storageValue ? storageValue === 'true' : configExpanded;
+                } catch (e) {
+                    console.error(e);
+                }
             }
             if (configExpanded !== undefined) {
-                setTimeout(() => (expanded = configExpanded as boolean), 100);
+                setTimeout(() => (expanded = configExpanded), 100);
             }
         }
     });
-
-    // Hack add static method to compiled Card class
-    thisComponent.constructor.getConfigElement = () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (window as any).ExpanderCardEditor = Editor;
-        return document.createElement('tag-name-editor');
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    thisComponent.constructor.getStubConfig = () => ({
-        ...defaults
-    });
-
-    /* eslint-enable prettier/prettier */
 </script>
 
 <ha-card
@@ -83,42 +94,47 @@
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
-                <Card {hass} config={config['title-card']} type={config['title-card'].type} />
+                <Card hass={hass} config={config['title-card']} type={config['title-card'].type} />
             </div>
             <button
+            aria-label="Toggle"
                 style="--overlay-margin:{config['overlay-margin']}; --button-background:{config[
                     'button-background'
                 ]};"
                 class={`header ripple ${config['title-card-button-overlay'] ? 'header-overlay' : ''}`}
-                on:click={() => {
+                onclick={() => {
                     expanded = !expanded;
                     if (config['expand-id'] !== undefined) {
-                      try {
-                        localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
-                      }
-                      catch { }
+                        try {
+                            localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                        }
+                        catch (e) {
+                            console.error(e);
+                        }
                     }
                 }}
             >
-                <ha-icon icon="mdi:chevron-down" class={`primaryico ${expanded ? 'flipped' : ''}`} />
+                <ha-icon icon="mdi:chevron-down" class={`primaryico ${expanded ? 'flipped' : ''}`} ></ha-icon>
             </button>
         </div>
     {:else}
         <button
             class="header ripple"
-            on:click={() => {
+            onclick={() => {
                 expanded = !expanded;
                 if (config['expand-id'] !== undefined) {
-                  try {
-                    localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
-                  }
-                  catch { }
+                    try {
+                        localStorage.setItem(`expander-${config['expand-id']}`,expanded ? 'true' : 'false');
+                    }
+                    catch (e) {
+                        console.error(e);
+                    }
                 }
             }}
             style="--button-background:{config['button-background']};"
         >
             <div class="primary title">{config.title}</div>
-            <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} />
+            <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} ></ha-icon>
         </button>
     {/if}
     {#if config.cards && expanded}
@@ -129,7 +145,7 @@
                         in:fade={{ duration: 500, easing: cubicOut }}
                         out:fade={{ duration: 250, easing: cubicIn }}
                     >
-                        <Card {hass} config={card} type={card.type} />
+                        <Card hass={hass} config={card} type={card.type} />
                     </div>
                 </div>
             {/each}
