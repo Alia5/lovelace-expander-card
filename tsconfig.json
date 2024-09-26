@@ -11,5 +11,9 @@
 		"sourceMap": true,
 		"strict": true
 	},
-    "include": ["src/**/*", "rollup.config.mjs"]
+    "include": [
+		"src/**/*.ts", 
+		"src/**/*.svelte", 
+		"rollup.config.mjs"
+	]
 }
