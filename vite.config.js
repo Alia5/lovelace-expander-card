@@ -10,12 +10,16 @@ export default defineConfig({
         replaceCodePlugin({
             replacements: process.env.DEV ? [
                 {
-                    from: '"lovelace-expander-card-editor"',
-                    to: '"lovelace-expander-card-editor-dev"'
+                    from: '"expander-card-editor"',
+                    to: '"expander-card-editor-dev"'
                 },
                 {
-                    from: '"lovelace-expander-card"',
-                    to: '"lovelace-expander-card-dev"'
+                    from: '"expander-card"',
+                    to: '"expander-card-dev"'
+                },
+                {
+                    from: '"expander-sub-card"',
+                    to: '"expander-sub-card-dev"'
                 }
             ] : [
             ],
