@@ -10,6 +10,7 @@
 		"sourceMap": true,
 		"strict": true,
         "module": "esnext",
+        "lib": ["es2019", "dom"],
         "moduleResolution": "bundler"
 	},
     "include": ["src/**/*"],

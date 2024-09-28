@@ -12,44 +12,38 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 -->
-<svelte:options customElement="expander-sub-card" />
+<!-- eslint-disable-next-line svelte/valid-compile -->
+<svelte:options customElement='expander-sub-card' />
 
 <script lang="ts">
     import type { HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
-    import { cardUtil } from './cardUtil';
+    import { getCardUtil } from './cardUtil.svelte';
+    import { onMount } from 'svelte';
 
-    export let type = 'div';
-    export let config: LovelaceCardConfig;
-    export let hass: HomeAssistant;
+    const {
+        type = 'div',
+        config,
+        hass
+    }: { type: string; config: LovelaceCardConfig; hass: HomeAssistant; self: HTMLElement } = $props();
 
-    let loading = true;
-    const uplift = (
-        node: HTMLElement,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        p: { type: string; hass: HomeAssistant }
-    ) => ({
-        // eslint-disable-next-line no-shadow
-        update: (p: { type: string; hass: HomeAssistant }) => {
-            if (node) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                if ((node.firstChild as any)?.tagName) {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    (node.firstChild as any).hass = p.hass;
-                    return;
-                }
-                void (async () => {
-                    const el = (await cardUtil).createCardElement(config);
-                    el.hass = p.hass;
-                    node.innerHTML = '';
-                    node.appendChild(el);
-                    loading = false;
-                })();
-            }
+    let container = $state<HTMLElement>();
+    let loading = $state(false);
+
+    onMount(async () => {
+        const util = await getCardUtil();
+        const el = util.createCardElement(config);
+        el.hass = hass;
+        if (!container) {
+            console.error('container doesn\'t exist');
+            return;
         }
+        container.innerHTML = '';
+        container.appendChild(el);
+        loading = false;
     });
 </script>
 
-<div use:uplift={{ type, hass }} ></div>
+<svelte:element this={type} bind:this={container}/>
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}

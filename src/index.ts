@@ -12,7 +12,7 @@ limitations under the License.
 */
 export { default as default } from './ExpanderCard.svelte';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { cardUtil } from './cardUtil';
+import { cardUtil } from './cardUtil.svelte';
 // Make Typescript Happy!
 declare global {
     interface Window {

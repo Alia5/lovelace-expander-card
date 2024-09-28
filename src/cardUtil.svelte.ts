@@ -18,5 +18,18 @@ export interface CardUtil {
     createCardElement: (config: LovelaceCardConfig) => LovelaceCard;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const cardUtil: Promise<CardUtil> = (() => ((window as any).loadCardHelpers() as Promise<any>).then((v) => v))();
+let cardUtil: CardUtil|undefined = $state(undefined);
+export const loadCardUtil = async (): Promise<CardUtil> => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    cardUtil = await (window as any).loadCardHelpers().then((v: any) => v);
+    return cardUtil as CardUtil;
+};
+
+export const getCardUtil = () => {
+    if (!cardUtil) {
+        return loadCardUtil();
+    }
+    return cardUtil;
+};
+
+// export const cardUtil: Promise<CardUtil> = (() => ((window as any).loadCardHelpers() as Promise<any>).then((v) => v))();
