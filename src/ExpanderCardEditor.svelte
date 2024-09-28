@@ -161,13 +161,17 @@ limitations under the License.
     let showAddCardPicker = $state(false);
 
     let cardPicker: HTMLElement|undefined = $state(undefined);
+    let subCardPicker: HTMLElement|undefined = $state(undefined);
 
     $effect(() => {
         // hack assign lovelace for this shit to work by hand
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (cardPicker && (!cardPicker as any).lovelace) {
+        if (cardPicker) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (cardPicker as any).lovelace = lovelace;
+        }
+        if (subCardPicker) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (subCardPicker as any).lovelace = lovelace;
         }
     });
 
@@ -327,7 +331,7 @@ limitations under the License.
                 <hui-card-picker
                     hass={hass}
                     lovelace={lovelace}
-                    bind:this={cardPicker}
+                    bind:this={subCardPicker}
                     onconfig-changed={passEv((ev) => {
                         console.log('cardpicker-config-changed');
                         ev.stopPropagation();
