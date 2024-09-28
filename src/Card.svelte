@@ -19,6 +19,7 @@ limitations under the License.
     import type { LovelaceCard, HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
     import { getCardUtil } from './cardUtil.svelte';
     import { onMount } from 'svelte';
+    import { slide } from 'svelte/transition';
 
     const {
         type = 'div',
@@ -50,7 +51,7 @@ limitations under the License.
     });
 </script>
 
-<svelte:element this={type} bind:this={container} />
+<svelte:element this={type} bind:this={container} transition:slide|local />
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}
