@@ -14,7 +14,7 @@ limitations under the License.
 -->
 <!-- eslint-disable-next-line svelte/valid-compile -->
 <svelte:options customElement={{
-    tag: 'lovelace-expander-card-editor',
+    tag: 'expander-card-editor',
     extend: (customElementConstructor) => class extends customElementConstructor {
         public config!: ExpanderConfig;
         public self!: HTMLElement;

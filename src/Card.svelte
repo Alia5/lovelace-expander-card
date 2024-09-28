@@ -12,7 +12,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 -->
-<svelte:options customElement="lovelace-expander-sub-card" />
+<svelte:options customElement="expander-sub-card" />
 
 <script lang="ts">
     import type { HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';

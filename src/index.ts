@@ -33,7 +33,7 @@ const devMode = import.meta.env.MODE === 'dev';
 window.customCards = window.customCards || [];
 window.customCards.push(...[
     {
-        type: `lovelace-expander-card${devMode ? '-dev' : ''}`,
+        type: `expander-card${devMode ? '-dev' : ''}`,
         name: `Expander Card${devMode ? '-dev' : ''}`,
         preview: true,
         description: `Expander Card${devMode ? ' Dev' : ''}`

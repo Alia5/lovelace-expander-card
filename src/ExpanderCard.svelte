@@ -16,7 +16,7 @@
 
 <!-- eslint-disable-next-line svelte/valid-compile -->
 <svelte:options customElement={{
-    tag: 'lovelace-expander-card',
+    tag: 'expander-card',
     extend: (customElementConstructor) => class extends customElementConstructor {
         // re-declare props used in customClass.
         public config!: ExpanderConfig;
@@ -29,7 +29,7 @@
         }
 
         public static getConfigElement() {
-            return document.createElement(`lovelace-expander-card-editor${devMode ? '-dev' : ''}`);
+            return document.createElement(`expander-card-editor${devMode ? '-dev' : ''}`);
         };
 
         public static getStubConfig(){
