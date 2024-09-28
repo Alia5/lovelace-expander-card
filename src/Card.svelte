@@ -13,10 +13,10 @@ limitations under the License.
 */
 -->
 <!-- eslint-disable-next-line svelte/valid-compile -->
-<svelte:options customElement='expander-sub-card' />
+<svelte:options  customElement='expander-sub-card' />
 
 <script lang="ts">
-    import type { HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
+    import type { LovelaceCard, HomeAssistant, LovelaceCardConfig } from 'custom-card-helpers';
     import { getCardUtil } from './cardUtil.svelte';
     import { onMount } from 'svelte';
 
@@ -24,12 +24,19 @@ limitations under the License.
         type = 'div',
         config,
         hass
-    }: { type: string; config: LovelaceCardConfig; hass: HomeAssistant; self: HTMLElement } = $props();
+    }: { type: string; config: LovelaceCardConfig; hass: HomeAssistant } = $props();
 
-    let container = $state<HTMLElement>();
-    let loading = $state(false);
+    let container = $state<LovelaceCard>();
+    let loading = $state(true);
+
+    $effect(() => {
+        if (container) {
+            container.hass = hass;
+        }
+    });
 
     onMount(async () => {
+        console.log('ExpanderSubCard onMount');
         const util = await getCardUtil();
         const el = util.createCardElement(config);
         el.hass = hass;
@@ -37,13 +44,13 @@ limitations under the License.
             console.error('container doesn\'t exist');
             return;
         }
-        container.innerHTML = '';
-        container.appendChild(el);
+        container.replaceWith(el);
+        container = el;
         loading = false;
     });
 </script>
 
-<svelte:element this={type} bind:this={container}/>
+<svelte:element this={type} bind:this={container} />
 {#if loading}
     <span style={'padding: 1em; display: block; '}> Loading... </span>
 {/if}
