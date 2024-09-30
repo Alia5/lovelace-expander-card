@@ -86,7 +86,7 @@
 
 <ha-card
     class={`expander-card ${config.clear ? 'clear' : ''}`}
-    style="--gap:{config.gap}; --padding:{config.padding}"
+    style="--padding:{config.padding}; --gap:{config.gap}"
 >
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
@@ -134,15 +134,16 @@
             <ha-icon icon="mdi:chevron-down" class={` primaryico ${expanded ? 'flipped' : ''}`} ></ha-icon>
         </button>
     {/if}
-    {#if config.cards && expanded}
-        <div
-            style="--gap:{config.gap}; --child-padding:{config['child-padding']}"
-            class="children-container"
-            transition:slide|local
-        >
-            {#each config.cards as card (card)}
-                    <Card hass={hass} config={card} type={card.type} />
-            {/each}
+    {#if config.cards}
+        <div class="animation-wrapper" style="grid-template-rows: {expanded ? '1fr' : '0fr'};">
+            <div
+                style={`--gap:${config.gap}; --child-padding:${config['child-padding']};`}
+                class="children-container"
+            >
+                {#each config.cards as card (card)}
+                        <Card hass={hass} config={card} type={card.type} />
+                {/each}
+            </div>
         </div>
     {/if}
 </ha-card>
@@ -150,15 +151,27 @@
 <style>
     .expander-card {
         display: grid;
-        gap: var(--gap);
         padding: var(--padding);
-        transition: all 0.3s ease-in-out;
+        grid-template-rows: 0fr;
+        transition: all 0.5s ease-in-out;
     }
+
+    .animation-wrapper {
+        display: grid;
+        overflow: hidden;
+        grid-template-rows: 0;
+        transition: grid-template-rows 0.5s ease-in-out;
+    }
+
     .children-container {
-        padding: var(--child-padding);
+        padding:  var(--child-padding);
         display: grid;
         gap: var(--gap);
         transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        & > :global(:first-child) {
+            margin-top: var(--gap);
+        }
     }
     .clear {
         background-color: transparent;
