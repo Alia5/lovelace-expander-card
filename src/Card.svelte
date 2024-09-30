@@ -24,8 +24,9 @@ limitations under the License.
     const {
         type = 'div',
         config,
-        hass
-    }: { type: string; config: LovelaceCardConfig; hass: HomeAssistant } = $props();
+        hass,
+        clearChild = false
+    }: { type: string; config: LovelaceCardConfig; hass: HomeAssistant; clearChild: boolean } = $props();
 
     let container = $state<LovelaceCard>();
     let loading = $state(true);
@@ -47,6 +48,16 @@ limitations under the License.
         }
         container.replaceWith(el);
         container = el;
+        if (clearChild) {
+            const shadowStyle = document.createElement('style');
+            shadowStyle.innerHTML = `
+                ha-card {
+                    background-color: transparent !important;
+                    border-style: none !important;
+                }
+            `;
+            el.shadowRoot?.appendChild(shadowStyle);
+        }
         loading = false;
     });
 </script>

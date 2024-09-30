@@ -14,6 +14,7 @@ import type { LovelaceCardConfig } from 'custom-card-helpers';
 
 export interface ExpanderConfig {
     clear?: boolean;
+    'clear-children'?: boolean;
     cards?: { type: string }[];
     gap: string;
     padding: string;

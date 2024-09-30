@@ -45,6 +45,7 @@ Yaml:
 | type                      | string   | **Required**  | `custom:expander-card` | Type of the card.                                              |
 | title                     | string   | _Expander_    | *                      | Title (Not displayed if using Title-Card)                      |
 | clear                     | boolean  | _false_       | true\|false            | Remove Background                                              |
+| clear-children            | boolean  | _false_       | true\|false            | Remove Backgrounds/Borders of child cards                      |
 | expanded                  | boolean  | _false_       | true\|false            | Start expanded                                                 |
 | expand-id                 | string   | **optional**  | string                 | Unique ID to use for JS LocalStorage. Will save expanded state |
 | button-background         | string   | _transparent_ | css-color              | Background color of expand button                              |

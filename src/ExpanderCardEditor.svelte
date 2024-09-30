@@ -64,6 +64,9 @@ limitations under the License.
         'clear': ['boolean', {
             label: 'Remove background'
         }],
+        'clear-children': ['boolean', {
+            label: 'Remove child card background/borders'
+        }],
         'expanded': ['boolean', {
             label: 'Start expanded (Always expanded in editor)'
         }],

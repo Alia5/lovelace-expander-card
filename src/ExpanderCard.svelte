@@ -7,6 +7,7 @@
         'gap': '0.6em',
         'padding': '1em',
         'clear': false,
+        'clear-children': false,
         'title': 'Expander',
         'overlay-margin': '2em',
         'child-padding': '0.5em',
@@ -91,7 +92,11 @@
     {#if config['title-card']}
         <div class={`title-card-header${config['title-card-button-overlay'] ? '-overlay' : ''}`}>
             <div class="title-card-container" style="--title-padding:{config['title-card-padding']}">
-                <Card hass={hass} config={config['title-card']} type={config['title-card'].type} />
+                <Card
+                    hass={hass}
+                    config={config['title-card']}
+                    type={config['title-card'].type}
+                    clearChild={config['clear-children'] || false} />
             </div>
             <button
             aria-label="Toggle"
@@ -141,7 +146,11 @@
                 class="children-container"
             >
                 {#each config.cards as card (card)}
-                        <Card hass={hass} config={card} type={card.type} />
+                        <Card
+                            hass={hass}
+                            config={card}
+                            type={card.type}
+                            clearChild={config['clear-children'] || false} />
                 {/each}
             </div>
         </div>
@@ -177,6 +186,18 @@
         background-color: transparent;
         border-style: none;
     }
+    .clear-children {
+        & :global(::slotted(ha-card)) {
+            background-color: transparent !important;
+            border-style: none !important;
+        }
+    }
+
+    :global(::slotted(ha-card)) {
+        background-color: transparent !important;
+        border-style: none !important;
+    }
+
     .title-card-header {
         display: flex;
         align-items: center;
