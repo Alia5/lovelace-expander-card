@@ -60,15 +60,17 @@ Yaml:
 
 ## Installation
 
-### Hacs
+### HACS
 
-Add this repository via HACS Custom repositories
+Click on the button below to add this repository to your HACS sources and open the integration in HACS automatically.
 
-https://github.com/Alia5/lovelace-expander-card
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Alia5&repository=lovelace-expander-card&category=integration)
 
-([How to add Custom Repositories](https://hacs.xyz/docs/faq/custom_repositories/))
+Alternatively, you can add it manually by following the [documentation here](https://hacs.xyz/docs/faq/custom_repositories/).
 
-### Manual
+The link to the repository is https://github.com/Alia5/lovelace-expander-card
+
+### Manual install
 #### 1. Download the card
 
 Install the `expander-card` card by copying `lovelace-expander-card.js` to `<config directory>/www/lovelace-expander-card.js`
